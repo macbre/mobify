@@ -64,7 +64,8 @@ class MobifySource(object):
 
         :rtype: lxml.html.HtmlElement
         """
-        return self.tree.xpath(xpath)[0]
+        nodes = self.tree.xpath(xpath)
+        return nodes[0] if len(nodes) > 0 else None
 
     def get_node(self, xpath, attr=None):
         """
