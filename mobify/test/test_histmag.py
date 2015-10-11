@@ -9,7 +9,7 @@ class Histmag(MobifyTestCase):
 
     def setUp(self):
         self._source = HistmagSource(
-            url=None,
+            url='',
             content=self.get_fixture('histmag-zielona-wyspa-kazimierza-wielkiego.html')
         )
 
@@ -25,7 +25,12 @@ class Histmag(MobifyTestCase):
         assert self._source.get_language() == 'pl'
 
         html = self._source.get_html()
+        print html  # failed assert will print the raw HTML
 
+        assert '<h1>Zielona wyspa Kazimierza Wielkiego</h1>' in html
         assert '<h3>Z pustego i Salomon nie naleje</h3>' in html
-        assert '<p>Zielona wyspa Kazimierza Wielkiego</p>' in html
         assert '<p>Drugim istotnym źródłem królewskich dochodów był nowy system podatkowy.' in html
+
+        assert '<p>Zielona wyspa Kazimierza Wielkiego</p>' not in html
+        assert '<div id="article">' not in html
+        assert '</div>' not in html
