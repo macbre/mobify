@@ -1,11 +1,9 @@
 from setuptools import setup, find_packages
 
-from mobify import __version__
-
 # @see https://github.com/pypa/sampleproject/blob/master/setup.py
 setup(
     name='mobify',
-    version=__version__,
+    version='0.1.0',
     author='Maciej Brencz',
     author_email='maciej.brencz@gmail.com',
     description='Download a webpage as an e-book',
