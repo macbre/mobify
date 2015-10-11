@@ -1,0 +1,1 @@
+from .histmag import HistmagSource
