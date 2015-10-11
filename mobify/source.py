@@ -54,7 +54,7 @@ class MobifySource(object):
         """
         if self._tree is None:
             self._logger.info('Parsing the content')
-            self._tree = html.fromstring(self._content, base_url=self._url)
+            self._tree = html.fromstring(self.content, base_url=self._url)
 
         return self._tree
 
@@ -84,6 +84,9 @@ class MobifySource(object):
 
     @classmethod
     def find_source_for_url(cls, url):
+        """
+        :rtype: MobifySource
+        """
         logger = logging.getLogger(__name__)
 
         # get all subclasses of Source
@@ -92,12 +95,11 @@ class MobifySource(object):
 
         # check matching sources (via URL)
         for source in sources:
-            instance = source(url)
-            logger.info('Checking "{}" source...'.format(instance.name))
+            logger.info('Checking "{}" source...'.format(source.__class__))
 
             try:
-                if instance.is_my_url() is True:
-                    return instance
+                if source.is_my_url(url) is True:
+                    return source(url)
             # Abstract sources throw 'Exception: Not implemented'
             except NotImplemented:
                 pass
