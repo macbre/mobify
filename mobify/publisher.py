@@ -8,7 +8,6 @@ from .source import MobifySource
 class Publisher(object):
     def __init__(self, url=None, chapters=None):
         self._logger = logging.getLogger(self.__class__.__name__)
-        self._logger.info('Creating en epub for <{}>'.format(url))
 
         if url is not None:
             self._chapters = [url]
@@ -16,6 +15,9 @@ class Publisher(object):
             self._chapters = chapters
         else:
             raise AttributeError('url or chapters must be provided')
+
+        self._logger.info('Creating en epub for {}'.format(self._chapters))
+        self._dest = self.get_dest_from_chapters(self._chapters, 'epub')
 
     def add_chapter(self, url):
         self._logger.info('Adding a chapter <{}>'.format(url))
@@ -32,9 +34,11 @@ class Publisher(object):
         dest = '{}.{}'.format(parsed.path.split('/').pop(), ext)
         return dest
 
-    def publish(self, dest=None):
+    def get_dest(self):
+        return self._dest
+
+    def publish(self):
         sources = [MobifySource.find_source_for_url(url) for url in self._chapters]
-        dest = dest if dest is not None else self.get_dest_from_chapters(self._chapters, 'epub')
 
         # @see https://github.com/booktype/ebooklib/blob/master/samples/03_advanced_create/create.py
         book = epub.EpubBook()
@@ -44,6 +48,9 @@ class Publisher(object):
         book.set_title(source.get_title())
         book.add_author(source.get_author())
         book.set_language(source.get_language())
+
+        self._logger.info('Book title: {}'.format(book.title.encode('utf8')))
+        self._logger.info('Book metadata: {}'.format(book.metadata))
 
         # add chapter(s)
         self._logger.info('Preparing chapters')
@@ -61,7 +68,7 @@ class Publisher(object):
             chapters.append(chapter)
             book.add_item(chapter)
 
-            self._logger.info('Chapter #{}: {}'.format(chapter_id, chapter.title.encode('utf8')))
+            self._logger.info('Chapter #{}: "{}"'.format(chapter_id, chapter.title.encode('utf8')))
             chapter_id += 1
 
         self._logger.info('{} chapter(s) added'.format(len(chapters)))
@@ -78,9 +85,9 @@ class Publisher(object):
             book.spine = chapters
 
         # write
-        self._logger.info('Publising epub to {}'.format(dest))
+        self._logger.info('Publising epub to {}'.format(self.get_dest()))
 
-        epub.write_epub(dest, book, {})
+        epub.write_epub(self.get_dest(), book, {})
 
         self._logger.info('Publising epub completed')
         return True

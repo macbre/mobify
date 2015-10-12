@@ -96,7 +96,7 @@ class MobifySource(object):
 
         # check matching sources (via URL)
         for source in sources:
-            logger.info('Checking "{}" source...'.format(source.__class__))
+            logger.info('Checking "{}" source...'.format(source))
 
             try:
                 if source.is_my_url(url) is True:
