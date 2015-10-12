@@ -35,6 +35,9 @@ class Publisher(object):
         return dest
 
     def get_dest(self):
+        """
+        :rtype: str
+        """
         return self._dest
 
     def publish(self):

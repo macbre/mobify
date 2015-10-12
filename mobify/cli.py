@@ -1,11 +1,11 @@
 import logging
+import subprocess
 
 from .publisher import Publisher
 
 def main():
     """ Main entry point for CLI"""
     # TODO: handle getopt
-    # TODO: generate epub via "ebook-convert" script
 
     logger = logging.getLogger(__name__)
 
@@ -26,3 +26,12 @@ def main():
 
     publisher = Publisher(chapters=chapters)
     publisher.publish()
+
+    # convert epub to mobi
+    epub_file = publisher.get_dest()
+    mobi_file = epub_file.replace('.epub', '.mobi')
+    logger.info('Converting to mobi: {}'.format(mobi_file))
+
+    subprocess.call(['ebook-convert', epub_file, mobi_file], stderr=subprocess.STDOUT)
+
+    logger.info('Converting completed')
