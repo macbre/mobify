@@ -4,16 +4,17 @@ from .publisher import Publisher
 
 def main():
     """ Main entry point for CLI"""
+    # TODO: handle getopt
+    # TODO: generate epub via "ebook-convert" script
+
     logger = logging.getLogger(__name__)
 
-    """
-    url = 'http://histmag.org/zielona-wyspa-kazimierza-wielkiego-11848;0'
-    ebook = 'zielona-wyspa-kazimierza-wielkiego.epub'
+    chapters = [
+        'http://histmag.org/czy-brytyjczycy-zdradzili-polskich-lotnikow-slow-kilka-o-polskiej-wojennej-mitologii-11972;0',
+        'http://histmag.org/polacy-w-bitwie-o-anglie-czas-o-nich-przypomniec-11897'
+    ]
+    ebook = 'czy-brytyjczycy-zdradzili-polskich-lotnikow-slow-kilka-o-polskiej-wojennej-mitologii.epub'
 
-    logger.info('URL:   <{}>'.format(url))
-    logger.info('Ebook: {}'.format(ebook))
-
-    publisher = Publisher(url=url)
     """
 
     chapters = [
@@ -22,9 +23,11 @@ def main():
         'http://histmag.org/Niech-zyje-car-Wladyslaw-Zygmuntowicz-Cz.-3-Upadek-planow-hetmana-8449;0'
     ]
     ebook = 'Niech-zyje-car-Wladyslaw-Zygmuntowicz.epub'
+    """
 
     logger.info('URL:   {}'.format(chapters))
     logger.info('Ebook: {}'.format(ebook))
 
     publisher = Publisher(chapters=chapters)
+
     publisher.publish(ebook)

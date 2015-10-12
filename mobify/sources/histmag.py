@@ -41,10 +41,12 @@ odnośnika do materiału objętego licencją.</small></p>
             'p[small]',
             'div[contains(@class, "social")]',
             'script',
-            'p[@class]',
+            'p[@class="article-info"]',
+            'p[@class="article-tags"]',
             'ul[li]',
             'p[span[@class="center"]]',  # big pictures
             'p/span/a/img',  # inline pictures
+            'p[iframe]',  # video
         ]
 
         for xpath in xpaths:
