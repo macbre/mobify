@@ -1,4 +1,5 @@
 import logging
+import urlparse
 
 from ebooklib import epub
 
@@ -20,8 +21,20 @@ class Publisher(object):
         self._logger.info('Adding a chapter <{}>'.format(url))
         self._chapters.append(url)
 
-    def publish(self, dest):
+    @staticmethod
+    def get_dest_from_chapters(chapters, ext):
+        if chapters is None or len(chapters) < 1:
+            return None
+
+        chapter = chapters[0]
+
+        parsed = urlparse.urlparse(chapter)
+        dest = '{}.{}'.format(parsed.path.split('/').pop(), ext)
+        return dest
+
+    def publish(self, dest=None):
         sources = [MobifySource.find_source_for_url(url) for url in self._chapters]
+        dest = dest if dest is not None else self.get_dest_from_chapters(self._chapters, 'epub')
 
         # @see https://github.com/booktype/ebooklib/blob/master/samples/03_advanced_create/create.py
         book = epub.EpubBook()
@@ -65,7 +78,7 @@ class Publisher(object):
             book.spine = chapters
 
         # write
-        self._logger.info('Publising epub')
+        self._logger.info('Publising epub to {}'.format(dest))
 
         epub.write_epub(dest, book, {})
 
