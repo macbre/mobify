@@ -13,21 +13,16 @@ def main():
         'http://histmag.org/czy-brytyjczycy-zdradzili-polskich-lotnikow-slow-kilka-o-polskiej-wojennej-mitologii-11972;0',
         'http://histmag.org/polacy-w-bitwie-o-anglie-czas-o-nich-przypomniec-11897'
     ]
-    ebook = 'czy-brytyjczycy-zdradzili-polskich-lotnikow-slow-kilka-o-polskiej-wojennej-mitologii.epub'
 
     """
-
     chapters = [
         'http://histmag.org/Niech-zyje-Car-Wladyslaw-Zygmuntowicz-Cz.-1-Rachuby-polityczne-i-wybuch-wojny-8350;0',
         'http://histmag.org/Niech-zyje-car-Wladyslaw-Zygmuntowicz-Cz.-2-Hetman-Stanislaw-Zolkiewski-w-rokowaniach-z-Moskwa-8386;0',
         'http://histmag.org/Niech-zyje-car-Wladyslaw-Zygmuntowicz-Cz.-3-Upadek-planow-hetmana-8449;0'
     ]
-    ebook = 'Niech-zyje-car-Wladyslaw-Zygmuntowicz.epub'
     """
 
     logger.info('URL:   {}'.format(chapters))
-    logger.info('Ebook: {}'.format(ebook))
 
     publisher = Publisher(chapters=chapters)
-
-    publisher.publish(ebook)
+    publisher.publish()

@@ -25,7 +25,7 @@ Portal historyczny Histmag.org, a także nazwę licencji (CC BY-SA 3.0) wraz z o
 W przypadku przedruku w internecie konieczne jest także zamieszczenie dokładnego aktywnego
 odnośnika do materiału objętego licencją.</small></p>
 
-<p><strong>Źródło</strong>: <a href="{url}">{url}</a></small></p>
+<p><small><strong>Źródło</strong>: <a href="{url}">{url}</a></small></p>
     """
 
     @staticmethod
