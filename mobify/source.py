@@ -117,6 +117,7 @@ class MobifySource(object):
             except NotImplemented:
                 pass
 
+        logger.error('No source found for <{}>'.format(url))
         return None
 
     def __str__(self):

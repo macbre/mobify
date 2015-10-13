@@ -3,6 +3,7 @@ import urlparse
 
 from ebooklib import epub
 
+from. errors import PublisherNoChaptersError
 from .source import MobifySource
 
 class Publisher(object):
@@ -16,7 +17,7 @@ class Publisher(object):
         else:
             raise AttributeError('url or chapters must be provided')
 
-        self._logger.info('Creating en epub for {}'.format(self._chapters))
+        self._logger.info('Creating an epub for {}'.format(self._chapters))
         self._dest = self.get_dest_from_chapters(self._chapters)
 
     def add_chapter(self, url):
@@ -42,6 +43,10 @@ class Publisher(object):
 
     def publish(self):
         sources = [MobifySource.find_source_for_url(url) for url in self._chapters]
+        sources = [source for source in sources if source]
+
+        if len(sources) == 0:
+            raise PublisherNoChaptersError('No chapters in the book')
 
         # @see https://github.com/booktype/ebooklib/blob/master/samples/03_advanced_create/create.py
         book = epub.EpubBook()
