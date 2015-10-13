@@ -17,28 +17,28 @@ class Publisher(object):
             raise AttributeError('url or chapters must be provided')
 
         self._logger.info('Creating en epub for {}'.format(self._chapters))
-        self._dest = self.get_dest_from_chapters(self._chapters, 'epub')
+        self._dest = self.get_dest_from_chapters(self._chapters)
 
     def add_chapter(self, url):
         self._logger.info('Adding a chapter <{}>'.format(url))
         self._chapters.append(url)
 
     @staticmethod
-    def get_dest_from_chapters(chapters, ext):
+    def get_dest_from_chapters(chapters):
         if chapters is None or len(chapters) < 1:
             return None
 
         chapter = chapters[0]
 
         parsed = urlparse.urlparse(chapter)
-        dest = '{}.{}'.format(parsed.path.split('/').pop(), ext)
+        dest = parsed.path.split('/').pop()
         return dest
 
-    def get_dest(self):
+    def get_dest(self, ext='epub'):
         """
         :rtype: str
         """
-        return self._dest
+        return '{}.{}'.format(self._dest, ext)
 
     def publish(self):
         sources = [MobifySource.find_source_for_url(url) for url in self._chapters]

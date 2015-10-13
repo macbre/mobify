@@ -11,6 +11,7 @@ class MobifySource(object):
         @type url str
         @type content str
         """
+        self._http = requests.session()
         self._logger = logging.getLogger(self.__class__.__name__)
 
         self._url = url
@@ -49,7 +50,7 @@ class MobifySource(object):
         if self._content is None:
             self._logger.info('Fetching <{}>'.format(self._url))
 
-            resp = requests.get(self._url)
+            resp = self._http.get(self._url)
             self._content = resp.text
 
             self._logger.info('HTTP {}, got {:.2f} kB'.format(resp.status_code, 1.0 * len(self._content) / 1024))
