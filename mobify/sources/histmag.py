@@ -28,6 +28,18 @@ odnośnika do materiału objętego licencją.</small></p>
 <p><small><strong>Źródło</strong>: <a href="{url}">{url}</a></small></p>
     """
 
+    def set_up(self):
+        self._url = self.extend_url(self._url)
+
+    @staticmethod
+    def extend_url(url):
+        # extend the histmag.org URL to make it a single page article
+        # http://histmag.org/Margaret-Thatcher-tajfun-reform-7896;0
+        if not url.endswith(';0'):
+            url += ';0'
+
+        return url
+
     @staticmethod
     def _cleanup(tree):
         tree = copy.copy(tree)
@@ -43,7 +55,7 @@ odnośnika do materiału objętego licencją.</small></p>
             'script',
             'p[@class="article-info"]',
             'p[@class="article-tags"]',
-            'ul[li]',
+            'ul[li[a]]',
             'p[span[@class="center"]]',  # big pictures
             'p/span/a/img',  # inline pictures
             'p[iframe]',  # video

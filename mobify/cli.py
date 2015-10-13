@@ -10,9 +10,13 @@ def main():
     logger = logging.getLogger(__name__)
 
     chapters = [
-        'http://histmag.org/czy-brytyjczycy-zdradzili-polskich-lotnikow-slow-kilka-o-polskiej-wojennej-mitologii-11972;0',
-        'http://histmag.org/polacy-w-bitwie-o-anglie-czas-o-nich-przypomniec-11897'
+        'http://histmag.org/Wikingowie-i-poczatki-ich-wypraw-w-VIII-IX-w.-prawda-i-mity-8767',
+        'http://histmag.org/Rola-smoka-w-mitologii-nordyckiej-4629',
+        'http://histmag.org/Swen-Widlobrody-dunski-mocarz-8900',
+        'http://histmag.org/Imie-krola-Haakona-czyli-jak-Norwegia-odzyskala-niepodleglosc-6098'
     ]
+
+    chapters = ['http://histmag.org/Wielkie-Ksiestwo-Poznanskie-nieudany-eksperyment-polskiej-autonomii-10643;0']
 
     """
     chapters = [

@@ -7,12 +7,21 @@ from lxml import html
 class MobifySource(object):
 
     def __init__(self, url, content=None):
+        """
+        @type url str
+        @type content str
+        """
         self._logger = logging.getLogger(self.__class__.__name__)
 
         self._url = url
 
         self._content = content if content is not None else None
         self._tree = None
+
+        self.set_up()
+
+    def set_up(self):
+        pass
 
     @staticmethod
     def is_my_url(url):
@@ -42,6 +51,8 @@ class MobifySource(object):
 
             resp = requests.get(self._url)
             self._content = resp.text
+
+            self._logger.info('HTTP {}, got {:.2f} kB'.format(resp.status_code, 1.0 * len(self._content) / 1024))
 
         return self._content
 
