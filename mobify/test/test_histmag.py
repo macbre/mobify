@@ -39,7 +39,7 @@ class Histmag(MobifyTestCase):
 
         assert '<h1>Zielona wyspa Kazimierza Wielkiego</h1>' in html
         assert '<h3>Z pustego i Salomon nie naleje</h3>' in html
-        assert '<p>Drugim istotnym źródłem królewskich dochodów był nowy system podatkowy.' in html
+        assert u'<p>Drugim istotnym źródłem królewskich dochodów był nowy system podatkowy.' in html
 
         assert '<p>Zielona wyspa Kazimierza Wielkiego</p>' not in html
         assert '<div id="article">' not in html
