@@ -20,4 +20,5 @@ lint:
 	pep8 $(project_name)/; pylint $(project_name)/
 
 publish:
+	python setup.py register -r pypi
 	python setup.py sdist upload -r pypi

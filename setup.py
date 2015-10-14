@@ -7,6 +7,7 @@ setup(
     author='Maciej Brencz',
     author_email='maciej.brencz@gmail.com',
     description='Download a webpage as an e-book',
+    url='https://github.com/macbre/mobify',
     keywords='epub mobi ebook html converter',
     packages=find_packages(),
     install_requires=[
