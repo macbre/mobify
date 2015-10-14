@@ -1,5 +1,4 @@
 import logging
-import urlparse
 
 from ebooklib import epub
 
@@ -31,8 +30,7 @@ class Publisher(object):
 
         chapter = chapters[0]
 
-        parsed = urlparse.urlparse(chapter)
-        dest = parsed.path.split('/').pop()
+        dest = chapter.split('/').pop()
         return dest
 
     def get_dest(self, ext='epub'):

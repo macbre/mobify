@@ -35,7 +35,7 @@ class Histmag(MobifyTestCase):
         assert self._source.get_language() == 'pl'
 
         html = self._source.get_html()
-        print html  # failed assert will print the raw HTML
+        print(html)  # failed assert will print the raw HTML
 
         assert '<h1>Zielona wyspa Kazimierza Wielkiego</h1>' in html
         assert '<h3>Z pustego i Salomon nie naleje</h3>' in html
