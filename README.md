@@ -5,6 +5,8 @@ Download a webpage as an e-book
 
 ## Install
 
+[![PyPI version](https://img.shields.io/pypi/pyversions/mobify.svg)](https://pypi.python.org/pypi/mobify)
+
 ```
 pip install mobify
 ```

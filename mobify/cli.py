@@ -49,5 +49,5 @@ def main():
     except MobifyError as ex:
         logger.error('Failed to generate an ebook', exc_info=True)
 
-        print ex
+        print(ex)
         exit(2)

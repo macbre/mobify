@@ -8,7 +8,7 @@ from mobify.source import MobifySource
 
 class HistmagSource(MobifySource):
 
-    HEADER = """
+    HEADER = u"""
 <h1>{title}</h1>
 <p><small>{author}</small><br></p>
 """
@@ -75,18 +75,18 @@ odnośnika do materiału objętego licencją.</small></p>
         article = self.xpath('//*[@id="article"]')
 
         article = self._cleanup(article)
-        html = etree.tostring(article, pretty_print=True, method="html", encoding='utf8')
+        html = etree.tostring(article, pretty_print=True, method="html", encoding='utf8').decode('utf8')
 
         # tags cleanup
-        html = re.sub(u'<h2></h2>', '', html)
-        html = re.sub(u'<p>\s*</p>', '', html)
-        html = re.sub(u'</?(span|a|img|em|div)[^>]*>', '', html)
+        html = re.sub(r'<h2></h2>', '', html)
+        html = re.sub(r'<p>\s*</p>', '', html)
+        html = re.sub(r'</?(span|a|img|em|div)[^>]*>', '', html)
 
         # add a title and a footer
         return '\n'.join([
-            self.HEADER.format(title=self.get_title().encode('utf8'), author=self.get_author().encode('utf8')).strip(),
+            self.HEADER.format(title=self.get_title(), author=self.get_author()).strip(),
             html,
-            self.FOOTER.format(url=self._url).strip().encode('utf8')
+            self.FOOTER.format(url=self._url).strip()
         ])
 
     def get_title(self):
