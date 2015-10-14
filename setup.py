@@ -11,6 +11,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'docopt==0.6.2',
+        'coverage==4.0.1',
         'ebooklib==0.15',
         'lxml==3.4.0',
         'pylint==1.4.4',
