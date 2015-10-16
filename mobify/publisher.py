@@ -1,5 +1,10 @@
 import logging
 
+try:
+    from urlparse import urlparse  # Py 2.x
+except ImportError:
+    from urllib.parse import urlparse  # Py 3.x
+
 from ebooklib import epub
 
 from. errors import PublisherNoChaptersError
@@ -30,7 +35,8 @@ class Publisher(object):
 
         chapter = chapters[0]
 
-        dest = chapter.split('/').pop()
+        parsed = urlparse(chapter)
+        dest = parsed.path.split('/').pop()
         return dest
 
     def get_dest(self, ext='epub'):
