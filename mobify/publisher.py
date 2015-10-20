@@ -8,7 +8,7 @@ except ImportError:
 from ebooklib import epub
 
 from. errors import PublisherNoChaptersError
-from .source import MobifySource
+from .source import MobifySource, MultiChapterSource
 
 class Publisher(object):
     def __init__(self, url=None, chapters=None):
@@ -46,8 +46,16 @@ class Publisher(object):
         return '{}.{}'.format(self._dest, ext)
 
     def publish(self):
-        sources = [MobifySource.find_source_for_url(url) for url in self._chapters]
-        sources = [source for source in sources if source]
+        sources = []
+
+        for url in self._chapters:
+            source = MobifySource.find_source_for_url(url)
+
+            if isinstance(source, MultiChapterSource):
+                # let's expand source that return multiple chapters (issue #7)
+                sources += source.get_chapters()
+            elif isinstance(source, MobifySource):
+                sources.append(source)
 
         if len(sources) == 0:
             raise PublisherNoChaptersError('No chapters in the book')
