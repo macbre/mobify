@@ -75,7 +75,7 @@ odnośnika do materiału objętego licencją.</small></p>
         article = self.xpath('//*[@id="article"]')
 
         article = self._cleanup(article)
-        html = etree.tostring(article, pretty_print=True, method="html", encoding='utf8').decode('utf8')
+        html = self.get_node_html(article)
 
         # tags cleanup
         html = re.sub(r'<h2></h2>', '', html)
