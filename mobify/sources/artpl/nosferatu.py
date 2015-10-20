@@ -55,7 +55,7 @@ class NosferatuSource(MobifySource):
         return self.get_node('//font[@size]')
 
     def get_author(self):
-        author = self.get_node('//p[@align]')
+        author = self.get_node('//p[@align]') or ''
         return re.sub(r'\s+', ' ', author)
 
     def get_language(self):
