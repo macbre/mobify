@@ -1,7 +1,7 @@
 import logging
 import requests
 
-from lxml import html
+from lxml import etree, html
 
 
 class MobifySource(object):
@@ -95,6 +95,15 @@ class MobifySource(object):
 
         return None
 
+    @staticmethod
+    def get_node_html(node):
+        """
+        Get's the HTML content of a given node
+
+        :rtype: str
+        """
+        return etree.tostring(node, pretty_print=True, method="html", encoding='utf8').decode('utf8')
+
     @classmethod
     def find_source_for_url(cls, url):
         """
@@ -102,8 +111,8 @@ class MobifySource(object):
         """
         logger = logging.getLogger(__name__)
 
-        # get all subclasses of Source
-        sources = cls.__subclasses__()
+        # get all subclasses of Source and MultiChapterSource
+        sources = MobifySource.__subclasses__() + MultiChapterSource.__subclasses__()
         logger.info('Mobify sources defined: {}'.format(len(sources)))
 
         # check matching sources (via URL)
@@ -114,7 +123,7 @@ class MobifySource(object):
                 if source.is_my_url(url) is True:
                     return source(url)
             # Abstract sources throw 'Exception: Not implemented'
-            except NotImplemented:
+            except NotImplementedError:
                 pass
 
         logger.error('No source found for <{}>'.format(url))
@@ -122,3 +131,27 @@ class MobifySource(object):
 
     def __str__(self):
         return '<{} {}>'.format(self.__class__.__name__, self._url)
+
+
+class MultiChapterSource(MobifySource):
+    """
+    Extend this class if you want to build a source that will return sources for sub-pages
+    """
+    def get_chapters(self):
+        raise NotImplementedError
+
+    @staticmethod
+    def is_my_url(url):
+        raise NotImplementedError
+
+    def get_html(self):
+        raise TypeError
+
+    def get_title(self):
+        raise TypeError
+
+    def get_author(self):
+        raise TypeError
+
+    def get_language(self):
+        raise TypeError
