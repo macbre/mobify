@@ -56,6 +56,8 @@ class MobifySource(object):
 
             self._logger.info('HTTP {}, got {:.2f} kB'.format(resp.status_code, 1.0 * len(self._content) / 1024))
 
+            assert resp.status_code < 400, "Invalid HTTP response received"
+
         return self._content
 
     @property

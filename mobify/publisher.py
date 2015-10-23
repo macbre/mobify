@@ -1,4 +1,5 @@
 import logging
+import re
 
 try:
     from urlparse import urlparse  # Py 2.x
@@ -37,6 +38,10 @@ class Publisher(object):
 
         parsed = urlparse(chapter)
         dest = parsed.path.split('/').pop()
+
+        # clean up the filename
+        dest = re.sub(r'[^a-z0-9]+', '_', dest, flags=re.IGNORECASE)
+
         return dest
 
     def get_dest(self, ext='epub'):
