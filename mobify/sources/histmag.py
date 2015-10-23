@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-import copy
 import re
-from lxml import etree
 
 from mobify.source import MobifySource
 
@@ -41,8 +39,11 @@ odnośnika do materiału objętego licencją.</small></p>
         return url
 
     @staticmethod
-    def _cleanup(tree):
-        tree = copy.copy(tree)
+    def is_my_url(url):
+        return url.startswith('http://histmag.org/')
+
+    def get_html(self):
+        article = self.xpath('//*[@id="article"]')
 
         # clean up the HTML
         xpaths = [
@@ -60,21 +61,8 @@ odnośnika do materiału objętego licencją.</small></p>
             'p/span/a/img',  # inline pictures
             'p[iframe]',  # video
         ]
+        article = self.remove_nodes(article, xpaths)
 
-        for xpath in xpaths:
-            nodes = tree.xpath(xpath)
-            [node.getparent().remove(node) for node in nodes]
-
-        return tree
-
-    @staticmethod
-    def is_my_url(url):
-        return url.startswith('http://histmag.org/')
-
-    def get_html(self):
-        article = self.xpath('//*[@id="article"]')
-
-        article = self._cleanup(article)
         html = self.get_node_html(article)
 
         # tags cleanup

@@ -1,3 +1,4 @@
+import copy
 import logging
 import requests
 
@@ -103,6 +104,21 @@ class MobifySource(object):
         :rtype: str
         """
         return etree.tostring(node, pretty_print=True, method="html", encoding='utf8').decode('utf8')
+
+    @staticmethod
+    def remove_nodes(tree, xpaths):
+        """
+        Remove all sub nodes matching given XPath(s)
+
+        :rtype: lxml.html.HtmlElement
+        """
+        tree = copy.copy(tree)
+
+        for xpath in xpaths:
+            nodes = tree.xpath(xpath)
+            [node.getparent().remove(node) for node in nodes]
+
+        return tree
 
     @classmethod
     def find_source_for_url(cls, url):
