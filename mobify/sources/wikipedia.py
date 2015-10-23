@@ -10,6 +10,8 @@ from mobify.source import MobifySource
 
 class WikipediaSource(MobifySource):
 
+    _original_url = None
+
     HEADER = u"""
 <h1>{title}</h1>
 <p><small>Z Wikipedii, wolnej encyklopedii</small><br></p>
@@ -28,6 +30,7 @@ Zobacz szczegółowe informacje o <a href="https://wikimediafoundation.org/wiki/
     URL_RE = r'https?://([^/]+)/wiki/(.*)$'
 
     def set_up(self):
+        self._original_url = self._url
         self._url = self.extend_url(self._url)
 
     @staticmethod
@@ -72,7 +75,7 @@ Zobacz szczegółowe informacje o <a href="https://wikimediafoundation.org/wiki/
         return '\n'.join([
             self.HEADER.format(title=self.get_title(), author=self.get_author()).strip(),
             html,
-            self.FOOTER.format(url=self._url).strip()
+            self.FOOTER.format(url=self._original_url).strip()
         ])
 
     def get_title(self):

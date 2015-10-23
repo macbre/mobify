@@ -9,7 +9,7 @@ class WikipediaSourceTest(MobifyTestCase):
 
     def setUp(self):
         self._source = WikipediaSource(
-            url='',
+            url='https://pl.wikipedia.org/wiki/Streymoy',
             content=self.get_fixture('wikipedia.html')
         )
 
@@ -45,6 +45,8 @@ class WikipediaSourceTest(MobifyTestCase):
 
         assert '<h1>Streymoy</h1>' in html
         assert u'<b>Streymoy</b> (duń. <i>Strømø</i>)' in html, "Basic HTML formatting should be kept"
+        assert u'<strong>Źródło</strong>: <a href="https://pl.wikipedia.org/wiki/Streymoy">' \
+               in html, "Show the original URL as the source"
 
         assert '<a href="#cite_note-Statystyki-1">[1]</a></sup>' in html, 'References should be kept'
         assert '<li id="cite_note-Statystyki-1">' in html, 'References should be kept'
