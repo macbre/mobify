@@ -46,8 +46,12 @@ class WikipediaSourceTest(MobifyTestCase):
         assert '<h1>Streymoy</h1>' in html
         assert u'<b>Streymoy</b> (duń. <i>Strømø</i>)' in html, "Basic HTML formatting should be kept"
 
+        assert '<a href="#cite_note-Statystyki-1">[1]</a></sup>' in html, 'References should be kept'
+        assert '<li id="cite_note-Statystyki-1">' in html, 'References should be kept'
+
         assert u'<h2>Spis treści</h2>' not in html, "TOC should be removed"
         assert 'edytuj kod' not in html, "Edit section should be removed"
         assert 'Kategoria' not in html, "Categories should be removed"
         assert 'Akwen' not in html, "Infobox should be removed"
-        assert 'Osobny artykuł:' not in html, "Non printable content should be removed"
+        assert u'Osobny artykuł:' not in html, "Non printable content should be removed"
+        assert u' title="Klif">wybrzeża klifowe</a>' not in html, "Internal links should be removed"

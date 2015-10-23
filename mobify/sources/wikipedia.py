@@ -58,8 +58,15 @@ Zobacz szczegółowe informacje o <a href="https://wikimediafoundation.org/wiki/
 
         html = self.get_node_html(article)
 
-        # remove links
-        html = re.sub(r'</?(a)[^>]*>', '', html)
+        # remove internal links
+        # <a href="/wiki/Klif" title="Klif">wybrzeża klifowe</a>
+        def link_replace(match):
+            content = match.group(1)  # e.g. [1]
+            is_ref = re.match(r'\[\d+\]', content)
+
+            return match.group(0) if is_ref else content
+
+        html = re.sub(r'<a[^>]*>([^<]+)</a>', link_replace, html)
 
         # add a title and a footer
         return '\n'.join([
