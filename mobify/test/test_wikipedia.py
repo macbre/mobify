@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function, unicode_literals
+
 from . import MobifyTestCase
 from mobify.sources import WikipediaSource
 
@@ -9,7 +11,7 @@ class WikipediaSourceTest(MobifyTestCase):
 
     def setUp(self):
         self._source = WikipediaSource(
-            url='https://pl.wikipedia.org/wiki/Streymoy',
+            url=str('https://pl.wikipedia.org/wiki/Streymoy'),
             content=self.get_fixture('wikipedia.html')
         )
 
@@ -44,16 +46,16 @@ class WikipediaSourceTest(MobifyTestCase):
         print(html)  # failed assert will print the raw HTML
 
         assert '<h1>Streymoy</h1>' in html
-        assert u'<b>Streymoy</b> (duń. <i>Strømø</i>)' in html, "Basic HTML formatting should be kept"
-        assert u'<strong>Źródło</strong>: <a href="https://pl.wikipedia.org/wiki/Streymoy">' \
+        assert '<b>Streymoy</b> (duń. <i>Strømø</i>)' in html, "Basic HTML formatting should be kept"
+        assert '<strong>Źródło</strong>: <a href="https://pl.wikipedia.org/wiki/Streymoy">' \
                in html, "Show the original URL as the source"
 
         assert '<a href="#cite_note-Statystyki-1">[1]</a></sup>' in html, 'References should be kept'
         assert '<li id="cite_note-Statystyki-1">' in html, 'References should be kept'
 
-        assert u'<h2>Spis treści</h2>' not in html, "TOC should be removed"
+        assert '<h2>Spis treści</h2>' not in html, "TOC should be removed"
         assert 'edytuj kod' not in html, "Edit section should be removed"
         assert 'Kategoria' not in html, "Categories should be removed"
         assert 'Akwen' not in html, "Infobox should be removed"
-        assert u'Osobny artykuł:' not in html, "Non printable content should be removed"
-        assert u' title="Klif">wybrzeża klifowe</a>' not in html, "Internal links should be removed"
+        assert 'Osobny artykuł:' not in html, "Non printable content should be removed"
+        assert ' title="Klif">wybrzeża klifowe</a>' not in html, "Internal links should be removed"

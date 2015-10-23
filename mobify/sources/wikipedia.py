@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import re
 try:
     from urllib import quote  # Py 2.x
@@ -12,12 +14,12 @@ class WikipediaSource(MobifySource):
 
     _original_url = None
 
-    HEADER = u"""
+    HEADER = """
 <h1>{title}</h1>
 <p><small>Z Wikipedii, wolnej encyklopedii</small><br></p>
 """
 
-    FOOTER = u"""
+    FOOTER = """
 <br><br>
 <hr>
 <p><small>Tekst udostępniany na <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.pl">licencji Creative Commons: uznanie autorstwa, na tych samych warunkach</a>, z możliwością obowiązywania dodatkowych ograniczeń.
