@@ -46,7 +46,7 @@ class WikipediaSourceTest(MobifyTestCase):
         print(html)  # failed assert will print the raw HTML
 
         assert '<h1>Streymoy</h1>' in html
-        assert '<b>Streymoy</b> (duń. <i>Strømø</i>)' in html, "Basic HTML formatting should be kept"
+        assert '<b>Streymoy</b>' in html, "Basic HTML formatting should be kept"
         assert '<strong>Źródło</strong>: <a href="https://pl.wikipedia.org/wiki/Streymoy">' \
                in html, "Show the original URL as the source"
 
