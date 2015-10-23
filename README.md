@@ -38,3 +38,4 @@ epub and mobi files will be saved in your working directory
 ## Supported sources
 
 * histmag.org
+* Wikipedia
