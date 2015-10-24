@@ -62,3 +62,5 @@ target/
 
 *.epub
 *.mobi
+
+.mobify_history

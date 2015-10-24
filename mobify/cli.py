@@ -46,6 +46,11 @@ def main():
 
         logger.info('Converting completed')
 
+        # store urls in the .mobify_history file
+        with open('.mobify_history', 'a') as f:
+            for url in chapters:
+                f.write(url + '\n')
+
     except MobifyError as ex:
         logger.error('Failed to generate an ebook', exc_info=True)
 
