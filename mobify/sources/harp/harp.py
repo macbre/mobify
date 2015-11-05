@@ -19,12 +19,18 @@ class HarpMainSource(MultiChapterSource):
         return 'github.io/' in url  # for now let's support books published on github.io
 
     def get_chapters(self):
-        links = self.tree.xpath('//div[contains(@class, "toc-element")]/a')
+        links = self.tree.xpath('//section[@id="sidebar"]//div[contains(@class, "toc-element")]/a')
         urls = [self._url + '/' + link.attrib.get('href') for link in links]
 
         self._logger.info('Links: {}'.format(urls))
 
-        return [HarpChapter(url) for url in urls]
+        chapters = [HarpChapter(url) for url in urls]
+
+        # generate the cover
+        cover = HarpCover(self._url)
+        chapters.insert(0, cover)
+
+        return chapters
 
 
 class HarpChapter(MobifySource):
@@ -48,20 +54,13 @@ class HarpChapter(MobifySource):
         html = self.get_node_html(content)
         html = re.sub(r'</?(span|a|img|em|div)[^>]*>', '', html)
 
-        return '<h1>{title}</h1>\n\n<p><small>{author}</small><br></p>\n\n{content}'.format(
+        return '<h1>{title}</h1>\n\n{content}'.format(
             title=self.get_title(),
-            author=self.get_author(),
             content=html.strip()
         )
 
-    def _is_the_first_chapter(self):
-        return self.get_node('//a[span[contains(@class, "glyphicon-chevron-left")]]') is None  # no prev link
-
     def get_title(self):
-        if self._is_the_first_chapter():
-            return self.get_node('//title')  # Docker Jumpstart
-        else:
-            return self.get_node('//section//h1')  # Images: Layered filesystems
+        return self.get_node('//section//h1')  # Images: Layered filesystems
 
     def get_author(self):
         title = self.get_node('//header//h1/a')  # 'Docker Jumpstart by Andrew Odewahn'
@@ -69,3 +68,37 @@ class HarpChapter(MobifySource):
 
     def get_language(self):
         return self.get_node('/html', attr='lang')
+
+
+class HarpCover(HarpChapter):
+    """
+    Generate the cover page
+    """
+
+    COVER = """
+<div style="{style}">
+    <h1>{title}</h1>
+    <br>
+    <h4>{author}</h4>
+    <br><br>
+    <p><small><a href="{url}">{url}</a><small></p>
+</div>
+"""
+
+    @staticmethod
+    def is_my_url(url):
+        """
+        This source cannot be created directly from Publisher
+        """
+        raise NotImplementedError
+
+    def get_html(self):
+        return self.COVER.format(
+            style="text-align: center; margin: 5em 2em",
+            title=self.get_title(),
+            author=self.get_author(),
+            url=self._url
+        ).strip()
+
+    def get_title(self):
+        return self.get_node('//title')  # Docker Jumpstart
