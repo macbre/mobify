@@ -37,7 +37,7 @@ class Publisher(object):
         chapter = chapters[0]
 
         parsed = urlparse(chapter)
-        dest = parsed.path.rstrip('/').split('/').pop()
+        dest = parsed.path.rstrip('/').split('/').pop() or parsed.hostname
 
         # clean up the filename
         dest = re.sub(r'[^a-z0-9]+', '_', dest, flags=re.IGNORECASE)
