@@ -37,5 +37,7 @@ epub and mobi files will be saved in your working directory
 
 ## Supported sources
 
+* Blogspot
 * histmag.org
+* Tumblr
 * Wikipedia
