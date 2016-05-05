@@ -31,6 +31,10 @@ class Histmag(MobifyTestCase):
             'http://histmag.org/Margaret-Thatcher-tajfun-reform-7896'
         ) == 'http://histmag.org/Margaret-Thatcher-tajfun-reform-7896;0'
 
+        assert HistmagSource.extend_url(
+            'http://histmag.org/zmarl-prof-janusz-tazbir-13257?newsletter=true'
+        ) == 'http://histmag.org/zmarl-prof-janusz-tazbir-13257;0'
+
     def test_parsing(self):
         assert self._source.get_title() == 'Zielona wyspa Kazimierza Wielkiego'
         assert self._source.get_author() == u'Marcin Sałański'

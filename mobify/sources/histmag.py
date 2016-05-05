@@ -31,6 +31,8 @@ odnośnika do materiału objętego licencją.</small></p>
 
     @staticmethod
     def extend_url(url):
+        url = url.replace('?newsletter=true', '')
+
         # extend the histmag.org URL to make it a single page article
         # http://histmag.org/Margaret-Thatcher-tajfun-reform-7896;0
         if not url.endswith(';0'):
