@@ -20,6 +20,8 @@ class Histmag(MobifyTestCase):
         assert not HistmagSource.is_my_url('http://example.com')
         assert HistmagSource.is_my_url(
             'http://histmag.org/Niech-zyje-car-Wladyslaw-Zygmuntowicz-Cz.-3-Upadek-planow-hetmana-8449;0')
+        assert HistmagSource.is_my_url(
+            'https://histmag.org/czy-powstanie-listopadowe-bylo-skazane-na-porazke-13520')
 
     @staticmethod
     def test_extend_url():

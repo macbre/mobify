@@ -42,7 +42,7 @@ odnośnika do materiału objętego licencją.</small></p>
 
     @staticmethod
     def is_my_url(url):
-        return url.startswith('http://histmag.org/')
+        return '//histmag.org/' in url
 
     def get_html(self):
         article = self.xpath('//*[@id="article"]')
