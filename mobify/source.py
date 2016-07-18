@@ -52,6 +52,9 @@ class MobifySource(object):
             self._logger.info('Fetching <{}>'.format(self._url))
 
             resp = self._http.get(self._url)
+
+            # @see http://docs.python-requests.org/en/master/api/#requests.Response
+            resp.encoding = 'utf-8'  # force UTF-8
             self._content = resp.text
 
             self._logger.info('HTTP {}, got {:.2f} kB'.format(resp.status_code, 1.0 * len(self._content) / 1024))
