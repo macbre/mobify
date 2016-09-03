@@ -29,9 +29,12 @@ odnośnika do materiału objętego licencją.</small></p>
     def set_up(self):
         self._url = self.extend_url(self._url)
 
+        self._logger.info('Setting a referer...')
+        self._http.headers['Referer'] = 'histmag.org/hello-from-mobify'
+
     @staticmethod
     def extend_url(url):
-        url = url.replace('?newsletter=true', '')
+        url = url.split('?')[0]
 
         # extend the histmag.org URL to make it a single page article
         # http://histmag.org/Margaret-Thatcher-tajfun-reform-7896;0

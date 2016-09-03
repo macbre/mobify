@@ -37,6 +37,10 @@ class Histmag(MobifyTestCase):
             'http://histmag.org/zmarl-prof-janusz-tazbir-13257?newsletter=true'
         ) == 'http://histmag.org/zmarl-prof-janusz-tazbir-13257;0'
 
+        assert HistmagSource.extend_url(
+            'https://histmag.org/Prawdziwy-powod-wybuchu-I-wojny-swiatowej-9648?ciekawostka'
+        ) == 'https://histmag.org/Prawdziwy-powod-wybuchu-I-wojny-swiatowej-9648;0'
+
     def test_parsing(self):
         assert self._source.get_title() == 'Zielona wyspa Kazimierza Wielkiego'
         assert self._source.get_author() == u'Marcin Sałański'
