@@ -1,5 +1,5 @@
 from .artpl import NosferatuMainSource
-from. aosabook import AosaBookSource
+from .aosabook import AosaBookSource
 from .blogspot import BlogSpotSource
 from .flask import FlaskSource
 from .harp import HarpMainSource

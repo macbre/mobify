@@ -2,7 +2,7 @@
 from __future__ import print_function
 
 from . import MobifyTestCase
-from mobify.sources import HistmagSource
+from mobify.sources.histmag import HistmagChapter, HistmagSource
 
 
 class Histmag(MobifyTestCase):
@@ -10,7 +10,7 @@ class Histmag(MobifyTestCase):
     _source = None
 
     def setUp(self):
-        self._source = HistmagSource(
+        self._source = HistmagChapter(
             url='',
             content=self.get_fixture('Maurycy-Beniowski-bunt-na-Kamczatce.html')
         )
@@ -19,27 +19,27 @@ class Histmag(MobifyTestCase):
     def test_is_my_url():
         assert not HistmagSource.is_my_url('http://example.com')
         assert HistmagSource.is_my_url(
-            'http://histmag.org/Niech-zyje-car-Wladyslaw-Zygmuntowicz-Cz.-3-Upadek-planow-hetmana-8449;0')
+            'http://histmag.org/Niech-zyje-car-Wladyslaw-Zygmuntowicz-Cz.-3-Upadek-planow-hetmana-8449')
         assert HistmagSource.is_my_url(
             'https://histmag.org/czy-powstanie-listopadowe-bylo-skazane-na-porazke-13520')
 
     @staticmethod
     def test_extend_url():
         assert HistmagSource.extend_url(
-            'http://histmag.org/Niech-zyje-car-Wladyslaw-Zygmuntowicz-Cz.-3-Upadek-planow-hetmana-8449;0'
-        ) == 'http://histmag.org/Niech-zyje-car-Wladyslaw-Zygmuntowicz-Cz.-3-Upadek-planow-hetmana-8449;0'
+            'http://histmag.org/Niech-zyje-car-Wladyslaw-Zygmuntowicz-Cz.-3-Upadek-planow-hetmana-8449'
+        ) == 'http://histmag.org/Niech-zyje-car-Wladyslaw-Zygmuntowicz-Cz.-3-Upadek-planow-hetmana-8449'
 
         assert HistmagSource.extend_url(
             'http://histmag.org/Margaret-Thatcher-tajfun-reform-7896'
-        ) == 'http://histmag.org/Margaret-Thatcher-tajfun-reform-7896;0'
+        ) == 'http://histmag.org/Margaret-Thatcher-tajfun-reform-7896'
 
         assert HistmagSource.extend_url(
             'http://histmag.org/zmarl-prof-janusz-tazbir-13257?newsletter=true'
-        ) == 'http://histmag.org/zmarl-prof-janusz-tazbir-13257;0'
+        ) == 'http://histmag.org/zmarl-prof-janusz-tazbir-13257'
 
         assert HistmagSource.extend_url(
             'https://histmag.org/Prawdziwy-powod-wybuchu-I-wojny-swiatowej-9648?ciekawostka'
-        ) == 'https://histmag.org/Prawdziwy-powod-wybuchu-I-wojny-swiatowej-9648;0'
+        ) == 'https://histmag.org/Prawdziwy-powod-wybuchu-I-wojny-swiatowej-9648'
 
     def test_parsing(self):
         assert self._source.get_title() == 'Maurycy Beniowski - bunt na Kamczatce'

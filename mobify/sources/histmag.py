@@ -1,10 +1,34 @@
 # -*- coding: utf-8 -*-
 import re
 
-from mobify.source import MobifySource
+from mobify.source import MultiChapterSource, MobifySource
 
 
-class HistmagSource(MobifySource):
+class HistmagSource(MultiChapterSource):
+    @staticmethod
+    def is_my_url(url):
+        return '//histmag.org/' in url
+
+    @staticmethod
+    def extend_url(url):
+        url = url.split('?')[0]
+        return url
+
+    def get_chapters(self):
+        url = self.extend_url(self._url)
+
+        # https://histmag.org/Maurycy-Beniowski-bunt-na-Kamczatce-13947/3
+        last_page_link = self.tree.xpath('//div[@class="paginator"][1]//a')[-1].attrib.get('href')
+        last_page_no = int(last_page_link.split('/')[-1])  # 3
+
+        chapters = ['{}/{}'.format(url, page) for page in range(1, last_page_no+1)]
+
+        self._logger.info('Chapters: {}'.format(chapters))
+
+        return [HistmagChapter(url=chapter) for chapter in chapters]
+
+
+class HistmagChapter(MobifySource):
 
     HEADER = u"""
 <h1>{title}</h1>
@@ -28,25 +52,15 @@ odnośnika do materiału objętego licencją.</small></p>
     """
 
     def set_up(self):
-        self._url = self.extend_url(self._url)
-
-        self._logger.info('Setting a referer...')
+        self._logger.info('Setting a referrer...')
         self._http.headers['Referer'] = 'histmag.org/hello-from-mobify'
 
     @staticmethod
-    def extend_url(url):
-        url = url.split('?')[0]
-
-        # extend the histmag.org URL to make it a single page article
-        # http://histmag.org/Margaret-Thatcher-tajfun-reform-7896;0
-        if not url.endswith(';0'):
-            url += ';0'
-
-        return url
-
-    @staticmethod
     def is_my_url(url):
-        return '//histmag.org/' in url
+        """
+        This source cannot be created directly from Publisher
+        """
+        raise NotImplementedError
 
     def get_html(self):
         article = self.xpath('//*[@class="middle"]')
