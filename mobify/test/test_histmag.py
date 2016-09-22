@@ -51,9 +51,9 @@ class Histmag(MobifyTestCase):
         print(html)  # failed assert will print the raw HTML
 
         assert '<h1>Maurycy Beniowski - bunt na Kamczatce</h1>' in html
-        assert u'<p><strong>Po upadku konfederacji barskiej został zesłany na Kamczatkę' in html
+        assert '<p><strong>Po upadku konfederacji barskiej' in html
         assert u'<p>W październiku 1769 roku Beniowski i Wynbladth uczestniczyć mieli w spisku' in html
 
         assert 'Kamczatka, ilustracja' not in html
         assert 'Maurycy Beniowski (1741-1786) (domena publiczna)' not in html
-        assert '<h4>Zobacz także:</h4>' not in html
+        assert u'<h4>Zobacz także:</h4>' not in html
