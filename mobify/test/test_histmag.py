@@ -12,7 +12,7 @@ class Histmag(MobifyTestCase):
     def setUp(self):
         self._source = HistmagSource(
             url='',
-            content=self.get_fixture('histmag-zielona-wyspa-kazimierza-wielkiego.html')
+            content=self.get_fixture('Maurycy-Beniowski-bunt-na-Kamczatce.html')
         )
 
     @staticmethod
@@ -42,17 +42,18 @@ class Histmag(MobifyTestCase):
         ) == 'https://histmag.org/Prawdziwy-powod-wybuchu-I-wojny-swiatowej-9648;0'
 
     def test_parsing(self):
-        assert self._source.get_title() == 'Zielona wyspa Kazimierza Wielkiego'
-        assert self._source.get_author() == u'Marcin Sałański'
+        assert self._source.get_title() == 'Maurycy Beniowski - bunt na Kamczatce'
+        assert self._source.get_lead() == u'Po upadku konfederacji barskiej został zesłany na Kamczatkę. Awanturnicza natura nie pozwoliła mu jednak długo zagrzać tam miejsca. Tak Maurycy Beniowski stanął na czele buntu. Czy wywalczył upragnioną wolność?'
+        assert self._source.get_author() == u'Mateusz Będkowski'
         assert self._source.get_language() == 'pl'
 
         html = self._source.get_html()
         print(html)  # failed assert will print the raw HTML
 
-        assert '<h1>Zielona wyspa Kazimierza Wielkiego</h1>' in html
-        assert '<h3>Z pustego i Salomon nie naleje</h3>' in html
-        assert u'<p>Drugim istotnym źródłem królewskich dochodów był nowy system podatkowy.' in html
+        assert '<h1>Maurycy Beniowski - bunt na Kamczatce</h1>' in html
+        assert u'<p><strong>Po upadku konfederacji barskiej został zesłany na Kamczatkę' in html
+        assert u'<p>W październiku 1769 roku Beniowski i Wynbladth uczestniczyć mieli w spisku' in html
 
-        assert '<p>Zielona wyspa Kazimierza Wielkiego</p>' not in html
-        assert '<div id="article">' not in html
-        assert '</div>' not in html
+        assert 'Kamczatka, ilustracja' not in html
+        assert 'Maurycy Beniowski (1741-1786) (domena publiczna)' not in html
+        assert '<h4>Zobacz także:</h4>' not in html

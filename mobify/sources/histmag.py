@@ -8,6 +8,7 @@ class HistmagSource(MobifySource):
 
     HEADER = u"""
 <h1>{title}</h1>
+<p><strong>{lead}</strong></p>
 <p><small>{author}</small><br></p>
 """
 
@@ -48,23 +49,16 @@ odnośnika do materiału objętego licencją.</small></p>
         return '//histmag.org/' in url
 
     def get_html(self):
-        article = self.xpath('//*[@id="article"]')
+        article = self.xpath('//*[@class="middle"]')
 
         # clean up the HTML
         xpaths = [
             'table',
-            'p[1]',  # first paragraph
-            'h4',  # "Zobacz też"
-            'hr',
-            'p[small]',
-            'div[contains(@class, "social")]',
-            'script',
-            'p[@class="article-info"]',
-            'p[@class="article-tags"]',
-            'ul[li[a]]',
-            'p[span[@class="center"]]',  # big pictures
-            'p/span/a/img',  # inline pictures
-            'p[iframe]',  # video
+            'div[@class="paginator"]',
+            'h4',  # Zobacz także
+            'p/span[img]',  # inline pictures
+            'p/span[a/img]',  # big pictures
+            'div[@class="snippet"]',  # reklamy
         ]
         article = self.remove_nodes(article, xpaths)
 
@@ -77,16 +71,22 @@ odnośnika do materiału objętego licencją.</small></p>
 
         # add a title and a footer
         return '\n'.join([
-            self.HEADER.format(title=self.get_title(), author=self.get_author()).strip(),
+            self.HEADER.format(title=self.get_title(), author=self.get_author(), lead=self.get_lead()).strip(),
             html,
             self.FOOTER.format(url=self._url).strip()
         ])
 
     def get_title(self):
-        return self.get_node('//title').strip()
+        # <h1 class="title"><p>Maurycy Beniowski - bunt na Kamczatce</p></h1>
+        return self.get_node('//div[contains(@class, "article_panel")]//p[1]').strip()
+
+    def get_lead(self):
+        # <h3 class="lead"><p>Po upadku konfederacji ...</p></h3>
+        return self.get_node('//div[contains(@class, "article_panel")]//p[2]').strip()
 
     def get_author(self):
-        return self.get_node('//p[@class="article-info"]//a').strip()
+        # <div class="author_name">Autor: <a href="https://histmag.org/profil/18785">Mateusz Będkowski </a><br>
+        return self.get_node('//*[@class="author_name"]/a').strip()
 
     def get_language(self):
         return 'pl'
