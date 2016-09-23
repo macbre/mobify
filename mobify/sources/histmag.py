@@ -18,8 +18,11 @@ class HistmagSource(MultiPageSource):
         url = self.extend_url(self._url)
 
         # https://histmag.org/Maurycy-Beniowski-bunt-na-Kamczatce-13947/3
-        last_page_link = self.tree.xpath('//div[@class="paginator"][1]//a')[-1].attrib.get('href')
-        last_page_no = int(last_page_link.split('/')[-1])  # 3
+        try:
+            last_page_link = self.tree.xpath('//div[@class="paginator"][1]//a')[-1].attrib.get('href')
+            last_page_no = int(last_page_link.split('/')[-1])  # 3
+        except IndexError:
+            last_page_no = 1
 
         pages = ['{}/{}'.format(url, page) for page in range(1, last_page_no+1)]
 
