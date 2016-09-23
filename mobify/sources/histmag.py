@@ -66,8 +66,9 @@ odnośnika do materiału objętego licencją.</small></p>
             'table',
             'div[@class="paginator"]',
             'h4',  # Zobacz także
-            'p/span[img]',  # inline pictures
-            'p/span[a/img]',  # big pictures
+            '*//span/a[img]',  # big pictures
+            '*//span/img',  # inline pictures
+            'img',
             'div[@class="snippet"]',  # reklamy
         ]
         article = self.remove_nodes(article, xpaths)
