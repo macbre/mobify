@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import re
 
-from mobify.source import MultiChapterSource, MobifySource
+from mobify.source import MultiPageSource, MobifySource
 
 
-class HistmagSource(MultiChapterSource):
+class HistmagSource(MultiPageSource):
     @staticmethod
     def is_my_url(url):
         return '//histmag.org/' in url
@@ -14,21 +14,21 @@ class HistmagSource(MultiChapterSource):
         url = url.split('?')[0]
         return url
 
-    def get_chapters(self):
+    def get_pages(self):
         url = self.extend_url(self._url)
 
         # https://histmag.org/Maurycy-Beniowski-bunt-na-Kamczatce-13947/3
         last_page_link = self.tree.xpath('//div[@class="paginator"][1]//a')[-1].attrib.get('href')
         last_page_no = int(last_page_link.split('/')[-1])  # 3
 
-        chapters = ['{}/{}'.format(url, page) for page in range(1, last_page_no+1)]
+        pages = ['{}/{}'.format(url, page) for page in range(1, last_page_no+1)]
 
-        self._logger.info('Chapters: {}'.format(chapters))
+        self._logger.info('Chapters: {}'.format(pages))
 
-        return [HistmagChapter(url=chapter) for chapter in chapters]
+        return [HistmagPage(url=page) for page in pages]
 
 
-class HistmagChapter(MobifySource):
+class HistmagPage(MobifySource):
 
     HEADER = u"""
 <h1>{title}</h1>
@@ -51,10 +51,6 @@ odnośnika do materiału objętego licencją.</small></p>
 <p><small><strong>Źródło</strong>: <a href="{url}">{url}</a></small></p>
     """
 
-    def set_up(self):
-        self._logger.info('Setting a referrer...')
-        self._http.headers['Referer'] = 'histmag.org/hello-from-mobify'
-
     @staticmethod
     def is_my_url(url):
         """
@@ -62,7 +58,7 @@ odnośnika do materiału objętego licencją.</small></p>
         """
         raise NotImplementedError
 
-    def get_html(self):
+    def get_inner_html(self):
         article = self.xpath('//*[@class="middle"]')
 
         # clean up the HTML
@@ -83,12 +79,15 @@ odnośnika do materiału objętego licencją.</small></p>
         html = re.sub(r'<p>\s*</p>', '', html)
         html = re.sub(r'</?(span|a|img|em|div)[^>]*>', '', html)
 
+        return html
+
+    def get_html(self):
         # add a title and a footer
         return '\n'.join([
             self.HEADER.format(title=self.get_title(), author=self.get_author(), lead=self.get_lead()).strip(),
-            html,
+            self.get_inner_html(),
             self.FOOTER.format(url=self._url).strip()
-        ])
+        ]).strip()
 
     def get_title(self):
         # <h1 class="title"><p>Maurycy Beniowski - bunt na Kamczatce</p></h1>

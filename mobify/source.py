@@ -41,6 +41,12 @@ class MobifySource(object):
     def get_language(self):
         raise NotImplementedError
 
+    def get_inner_html(self):
+        """
+        :rtype: str
+        """
+        return self.get_html()
+
     @property
     def content(self):
         """
@@ -133,7 +139,10 @@ class MobifySource(object):
         logger = logging.getLogger(__name__)
 
         # get all subclasses of Source and MultiChapterSource
-        sources = MobifySource.__subclasses__() + MultiChapterSource.__subclasses__()
+        sources = MobifySource.__subclasses__() + \
+            MultiChapterSource.__subclasses__() + \
+            MultiPageSource.__subclasses__()
+
         logger.info('Mobify sources defined: {}'.format(len(sources)))
 
         # check matching sources (via URL)
@@ -159,6 +168,31 @@ class MultiChapterSource(MobifySource):
     Extend this class if you want to build a source that will return sources for sub-pages
     """
     def get_chapters(self):
+        raise NotImplementedError
+
+    @staticmethod
+    def is_my_url(url):
+        raise NotImplementedError
+
+    def get_html(self):
+        raise TypeError
+
+    def get_title(self):
+        raise TypeError
+
+    def get_author(self):
+        raise TypeError
+
+    def get_language(self):
+        raise TypeError
+
+
+class MultiPageSource(MobifySource):
+    """
+    Extend this class if you want to build a source that will return sources for sub-pages,
+    but will not created separate chapters
+    """
+    def get_pages(self):
         raise NotImplementedError
 
     @staticmethod

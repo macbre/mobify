@@ -2,7 +2,7 @@
 from __future__ import print_function
 
 from . import MobifyTestCase
-from mobify.sources.histmag import HistmagChapter, HistmagSource
+from mobify.sources.histmag import HistmagPage, HistmagSource
 
 
 class Histmag(MobifyTestCase):
@@ -10,7 +10,7 @@ class Histmag(MobifyTestCase):
     _source = None
 
     def setUp(self):
-        self._source = HistmagChapter(
+        self._source = HistmagPage(
             url='',
             content=self.get_fixture('Maurycy-Beniowski-bunt-na-Kamczatce.html')
         )

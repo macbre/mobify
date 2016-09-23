@@ -8,8 +8,9 @@ except ImportError:
 
 from ebooklib import epub
 
-from. errors import PublisherNoChaptersError
-from .source import MobifySource, MultiChapterSource
+from .errors import PublisherNoChaptersError
+from .source import MobifySource, MultiChapterSource, MultiPageSource
+
 
 class Publisher(object):
     def __init__(self, url=None, chapters=None):
@@ -59,6 +60,22 @@ class Publisher(object):
             if isinstance(source, MultiChapterSource):
                 # let's expand source that return multiple chapters (issue #7)
                 sources += source.get_chapters()
+            elif isinstance(source, MultiPageSource):
+                pages = source.get_pages()
+
+                # let's use the first page as the source of metadata
+                first_page = pages[0]
+                sources.append(first_page)
+
+                # now get the inner content of each page (excluded titles and footers) ...
+                content = ''
+
+                for page in pages:
+                    content += page.get_inner_html()
+
+                # ... and set it for the first page source
+                first_page.get_inner_html = lambda: content
+
             elif isinstance(source, MobifySource):
                 sources.append(source)
 
