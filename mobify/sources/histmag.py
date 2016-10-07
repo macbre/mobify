@@ -102,8 +102,7 @@ odnośnika do materiału objętego licencją.</small></p>
         return self.get_node('//div[contains(@class, "article_panel")]//p[2]').strip()
 
     def get_author(self):
-        # <div class="author_name">Autor: <a href="https://histmag.org/profil/18785">Mateusz Będkowski </a><br>
-        return self.get_node('//*[@class="author_name"]/a').strip()
+        return self.get_node('//*[contains(@class, "author_name")]//a/text()[2]').strip()
 
     def get_language(self):
         return 'pl'
