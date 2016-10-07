@@ -10,6 +10,7 @@ class Histmag(MobifyTestCase):
     _source = None
 
     def setUp(self):
+        # @see https://histmag.org/Maurycy-Beniowski-bunt-na-Kamczatce-13947
         self._source = HistmagPage(
             url='',
             content=self.get_fixture('Maurycy-Beniowski-bunt-na-Kamczatce.html')
