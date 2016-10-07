@@ -101,7 +101,11 @@ class MobifySource(object):
 
         if node is not None:
             if attr is None:
-                return node.text
+                try:
+                    return node.text
+                except AttributeError:
+                    # handle lxml.etree._ElementUnicodeResult - xpath with "text()'
+                    return node
             else:
                 return node.attrib.get(attr)
 
