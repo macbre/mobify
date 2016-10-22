@@ -14,7 +14,7 @@ class AosaBookSource(MobifySource):
         return '//aosabook.org/' in url
 
     def get_html(self):
-        article = self.xpath('//div[@class="row"]')
+        article = self.xpath('//div[@class="row" and not(div[@class="hero-unit"])]')
 
         # clean up the HTML
         article = self.remove_nodes(article, ['*//footer', '*//figure'])
@@ -31,7 +31,13 @@ class AosaBookSource(MobifySource):
         return self.get_node('//h1').strip()
 
     def get_author(self):
-        return self.get_node('//div[@class="hero-unit"]//p/a').strip()
+        try:
+            author = self.get_node('//div[@class="hero-unit"]//p/a').strip()
+        except AttributeError:
+            # @see http://aosabook.org/en/500L/a-web-crawler-with-asyncio-coroutines.html
+            author = self.get_node('//div[@class="hero-unit"]//h2').strip()
+
+        return author
 
     def get_language(self):
         return 'en'
