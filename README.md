@@ -11,7 +11,7 @@ Download a webpage as an e-book
 pip install mobify
 ```
 
-You may need to run `sudo apt-get install zlib1g-dev` if `lxml` install fails.
+You may need to run `sudo apt-get install zlib1g-dev` if `lxml` install fails (`python3.4-dev` package is required as well to compile `lxml`).
 
 ### For Kindle users
 
