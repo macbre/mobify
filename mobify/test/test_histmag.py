@@ -75,7 +75,7 @@ class HistmagChurchill(MobifyTestCase):
         )
 
     def test_parsing(self):
-        assert self._source.get_title() == 'Winston Churchill – lew Albionu'
+        assert self._source.get_title() == u'Winston Churchill – lew Albionu'
         assert self._source.get_lead() == ''
         assert self._source.get_author() == u'Michał Gadziński'
         assert self._source.get_language() == 'pl'
@@ -83,8 +83,8 @@ class HistmagChurchill(MobifyTestCase):
         html = self._source.get_html()
         print(html)  # failed assert will print the raw HTML
 
-        assert '<h1>Winston Churchill – lew Albionu</h1>' in html
-        assert '<h3>Potomek księcia Marlborough</h3>' in html
-        assert '<p>Winston Leonard Spencer-Churchill przyszedł na świat 30 listopada 1874 roku. ' in html
+        assert u'<h1>Winston Churchill – lew Albionu</h1>' in html
+        assert u'<h3>Potomek księcia Marlborough</h3>' in html
+        assert u'<p>Winston Leonard Spencer-Churchill przyszedł na świat 30 listopada 1874 roku. ' in html
 
         assert u'<h3>Tekst jest fragmentem e-booka Michała Gadzińskiego „Perły imperium brytyjskiego”:</h3>' not in html
