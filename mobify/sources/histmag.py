@@ -73,6 +73,7 @@ odnośnika do materiału objętego licencją.</small></p>
             '*//span/img',  # inline pictures
             'img',
             'div[@class="snippet"]',  # reklamy
+            'h3[contains(text(), "Tekst jest fragmentem")]',  # fragmenty książek
         ]
         article = self.remove_nodes(article, xpaths)
 
@@ -99,7 +100,9 @@ odnośnika do materiału objętego licencją.</small></p>
 
     def get_lead(self):
         # <h3 class="lead"><p>Po upadku konfederacji ...</p></h3>
-        return self.get_node('//div[contains(@class, "article_panel")]//p[2]').strip()
+        lead = self.get_node('//div[contains(@class, "article_panel")]//p[2]')
+
+        return lead.strip() if lead else ''
 
     def get_author(self):
         return self.get_node('//*[contains(@class, "author_name")]//a/text()[2]').strip()
