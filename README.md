@@ -13,6 +13,13 @@ pip install mobify
 
 You may need to run `sudo apt-get install zlib1g-dev` if `lxml` install fails (`python3.4-dev` package is required as well to compile `lxml`).
 
+#### virtualenv
+
+```
+virtualenv --system-site-packages env3 -p python3
+pip install -U -e .
+```
+
 ### For Kindle users
 
 You need to install `calibre` package to be able to convert epub to mobi (using `ebook-convert`)
