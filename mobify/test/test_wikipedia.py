@@ -39,7 +39,7 @@ class WikipediaSourceTest(MobifyTestCase):
 
         assert WikipediaSource.extend_url(
             'http://poznan.wikia.com/wiki/Gzik'
-        ) == 'http://poznan.wikia.com/Gzik?useskin=monobook'
+        ) == 'http://poznan.wikia.com/Gzik?useskin=monobook&printable=yes'
 
         assert WikipediaSource.extend_url(
             'http://example.com'

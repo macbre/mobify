@@ -47,7 +47,7 @@ Zobacz szczegółowe informacje o <a href="https://wikimediafoundation.org/wiki/
         domain = matches.group(1)
 
         if 'wikia.com' in domain:
-            return 'http://{domain}/{title}?useskin=monobook'.format(
+            return 'http://{domain}/{title}?useskin=monobook&printable=yes'.format(
                 domain=domain, title=matches.group(2))
         else:
             return 'https://{domain}/w/index.php?title={title}&printable=yes'.format(
@@ -96,4 +96,4 @@ Zobacz szczegółowe informacje o <a href="https://wikimediafoundation.org/wiki/
         return self.get_node('//*[@id="siteSub"]')
 
     def get_language(self):
-        return self.get_node('//h1', 'lang')
+        return self.get_node('//html', 'lang')
