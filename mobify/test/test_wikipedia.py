@@ -37,6 +37,14 @@ class WikipediaSourceTest(MobifyTestCase):
             'http://pl.wikipedia.pl/wiki/Foo %26 Bar'
         ) == 'https://pl.wikipedia.pl/w/index.php?title=Foo %26 Bar&printable=yes'
 
+        assert WikipediaSource.extend_url(
+            'http://poznan.wikia.com/wiki/Gzik'
+        ) == 'http://poznan.wikia.com/Gzik?useskin=monobook'
+
+        assert WikipediaSource.extend_url(
+            'http://example.com'
+        ) is None
+
     def test_parsing(self):
         assert self._source.get_title() == 'Streymoy'
         assert self._source.get_author() == 'Z Wikipedii, wolnej encyklopedii'

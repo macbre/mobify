@@ -41,8 +41,17 @@ Zobacz szczegółowe informacje o <a href="https://wikimediafoundation.org/wiki/
         # https://pl.wikipedia.org/w/index.php?title=Kirkja&printable=yes
         matches = re.match(WikipediaSource.URL_RE, url)
 
-        return 'https://{domain}/w/index.php?title={title}&printable=yes'.format(
-            domain=matches.group(1), title=matches.group(2)) if matches else None
+        if matches is None:
+            return None
+
+        domain = matches.group(1)
+
+        if 'wikia.com' in domain:
+            return 'http://{domain}/{title}?useskin=monobook'.format(
+                domain=domain, title=matches.group(2))
+        else:
+            return 'https://{domain}/w/index.php?title={title}&printable=yes'.format(
+                domain=domain, title=matches.group(2))
 
     @staticmethod
     def is_my_url(url):
