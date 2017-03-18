@@ -5,6 +5,7 @@ from .flask import FlaskSource
 from .harp import HarpMainSource
 from .histmag import HistmagSource
 from .medium import MediumSource
+from .readthedocs import ReadTheDocsBookSource
 from .rust import RustBookSource
 from .tumblr import TumblrArchiveSource
 from .wikipedia import WikipediaSource
