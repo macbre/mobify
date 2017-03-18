@@ -11,6 +11,13 @@ from mobify.source import MobifySource
 
 
 class WikipediaSource(MobifySource):
+    """
+    Use the following JS snippet to fetch the list category pages:
+
+    $('#mw-pages li a').toArray().map(function(item) {
+        return '"https:' + wgServer + item.getAttribute('href') + '"'
+    }).join(' ')
+    """
 
     _original_url = None
 
