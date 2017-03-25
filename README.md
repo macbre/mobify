@@ -60,5 +60,7 @@ DEBUG=1 mobify ...
 
 * Blogspot
 * histmag.org
+* medium.com
+* readthedocs.io
 * Tumblr
 * Wikipedia
