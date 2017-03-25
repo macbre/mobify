@@ -40,7 +40,13 @@ Or you can render a multi-chapter ebook from several URLs (simply separate them 
 mobify "http://histmag.org/william-wallace-bohater-szkotow-bohater-popkultury-11698" "http://histmag.org/Historia-Szkocji-10-dat-ktore-powinienes-znac-10028"
 ```
 
-epub and mobi files will be saved in your working directory
+epub and mobi files will be saved in your working directory.
+
+You can force a specific source to be used to parse the URL:
+
+```
+mobify 'https://deeplearningsandbox.com/how-to-build-an-image-recognition-system-using-keras-and-tensorflow-for-a-1000-everyday-object-559856e04699#.oqknumtc6' --source MediumSource
+```
 
 ## Debugging
 

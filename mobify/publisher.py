@@ -10,10 +10,11 @@ from ebooklib import epub
 
 from .errors import PublisherNoChaptersError
 from .source import MobifySource, MultiChapterSource, MultiPageSource
+from mobify import sources as mobify_sources
 
 
 class Publisher(object):
-    def __init__(self, url=None, chapters=None):
+    def __init__(self, url=None, chapters=None, source_hint=None):
         self._logger = logging.getLogger(self.__class__.__name__)
 
         if url is not None:
@@ -22,6 +23,12 @@ class Publisher(object):
             self._chapters = chapters
         else:
             raise AttributeError('url or chapters must be provided')
+
+        if source_hint:
+            self._source_hint = source_hint
+            self._logger.info('Got a hint on which source to use - "{}"'.format(self._source_hint))
+        else:
+            self._source_hint = None
 
         self._logger.info('Creating an epub for {}'.format(self._chapters))
         self._dest = self.get_dest_from_chapters(self._chapters)
@@ -55,7 +62,11 @@ class Publisher(object):
         sources = []
 
         for url in self._chapters:
-            source = MobifySource.find_source_for_url(url)
+            if self._source_hint:
+                source = getattr(mobify_sources, self._source_hint)(url)
+                self._logger.info('Using {} source from a hint (--source)'.format(source))
+            else:
+                source = MobifySource.find_source_for_url(url)
 
             if isinstance(source, MultiChapterSource):
                 # let's expand source that return multiple chapters (issue #7)

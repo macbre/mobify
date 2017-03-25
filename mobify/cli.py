@@ -35,7 +35,7 @@ def main():
     logger.info('URL:   {}'.format(chapters))
 
     try:
-        publisher = Publisher(chapters=chapters)
+        publisher = Publisher(chapters=chapters, source_hint=arguments.get('--source'))
         publisher.publish()
 
         # convert epub to mobi
