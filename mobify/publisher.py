@@ -112,6 +112,8 @@ class Publisher(object):
         chapter_id = 1
 
         for source in sources:
+            self._logger.debug('Parsing chapter #{} using {} ...'.format(chapter_id, source))
+
             chapter = epub.EpubHtml(
                 title=source.get_title(),
                 file_name='{}.xhtml'.format(chapter_id),

@@ -41,9 +41,8 @@ class ReadTheDocsBookSource(MultiChapterSource):
     def get_chapters(self):
         links = self.tree.xpath('//*[@aria-label="main navigation"]//a')
 
-        url = self.get_canonical_url(self._url)
-        chapters = [url] + \
-                   [(url + '/' + link.attrib.get('href').lstrip('/.').split('#')[0]).rstrip('/') for link in links]
+        url = self.get_canonical_url(self._url) + '/'
+        chapters = [url] + [url + link.attrib.get('href').lstrip('/.').split('#')[0] for link in links]
 
         chapters = unique(chapters)
 
@@ -61,7 +60,7 @@ class ReadTheDocsBookChapter(MobifySource):
         raise NotImplementedError
 
     def get_html(self):
-        content = self.xpath('//*[@itemprop="articleBody"]')
+        content = self.xpath('//*[@class="section"]')
 
         html = self.get_node_html(content)
 
@@ -80,7 +79,7 @@ class ReadTheDocsBookChapter(MobifySource):
         return html.strip()
 
     def get_title(self):
-        return self.get_node('//h1//text()')
+        return self.get_node('//h1//text()') or self.get_node('//li/a[contains(@class, "current")]/text()')
 
     def get_author(self):
         return self.get_node('//link[@rel="top"]', attr='title')  # Lasagne 0.2.dev1 documentation
