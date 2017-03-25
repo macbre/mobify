@@ -42,6 +42,14 @@ mobify "http://histmag.org/william-wallace-bohater-szkotow-bohater-popkultury-11
 
 epub and mobi files will be saved in your working directory
 
+## Debugging
+
+Simply set `DEBUG` env variable to `1`.
+
+```
+DEBUG=1 mobify ...
+```
+
 ## Supported sources
 
 * Blogspot

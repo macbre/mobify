@@ -3,14 +3,15 @@
 Download a web page (set of web pages) as an e-book.
 
 Usage:
-  mobify URL ...
+  mobify URL ... [--source=<source>]
   mobify (-h | --help)
   mobify --version
 
 Options:
-  URL           Space-separated list of URLs to fetch.
-  -h --help     Show this screen.
-  --version     Show version.
+  URL               Space-separated list of URLs to fetch.
+  -h --help         Show this screen.
+  --source=<source> Force a given source type
+  --version         Show version.
 """
 
 import logging
