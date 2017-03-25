@@ -4,8 +4,18 @@ Read The Docs materials
 https://lasagne.readthedocs.io/en/latest/
 """
 import re
+from collections import OrderedDict
 
 from mobify.source import MultiChapterSource, MobifySource
+
+
+def unique(_list):
+    _dict = OrderedDict()
+
+    for item in _list:
+        _dict[item] = True
+
+    return list(_dict.keys())
 
 
 class ReadTheDocsBookSource(MultiChapterSource):
@@ -26,13 +36,16 @@ class ReadTheDocsBookSource(MultiChapterSource):
         if matches:
             return 'https://{}.readthedocs.io/en/latest'.format(matches.group(1))
         else:
-            return None
+            return url.rstrip('/')
 
     def get_chapters(self):
         links = self.tree.xpath('//*[@aria-label="main navigation"]//a')
 
         url = self.get_canonical_url(self._url)
-        chapters = [url] + [url + '/' + link.attrib.get('href').lstrip('/') for link in links]
+        chapters = [url] + \
+                   [(url + '/' + link.attrib.get('href').lstrip('/.').split('#')[0]).rstrip('/') for link in links]
+
+        chapters = unique(chapters)
 
         self._logger.info('Chapters: {}'.format(chapters))
 
