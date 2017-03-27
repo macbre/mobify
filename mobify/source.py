@@ -7,12 +7,15 @@ from lxml import etree, html
 
 class MobifySource(object):
 
+    # lazy-setup HTTP client via cls._get_http
+    http = None
+
     def __init__(self, url, content=None):
         """
         @type url str
         @type content str
         """
-        self._http = requests.session()
+        self._http = self._get_http()
         self._logger = logging.getLogger(self.__class__.__name__)
 
         self._url = url
@@ -21,6 +24,16 @@ class MobifySource(object):
         self._tree = None
 
         self.set_up()
+
+    @classmethod
+    def _get_http(cls):
+        """
+        :rtype: requests.Session
+        """
+        if cls.http is None:
+            cls.http = requests.session()
+
+        return cls.http
 
     def set_up(self):
         pass
