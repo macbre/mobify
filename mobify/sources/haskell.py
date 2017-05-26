@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Learn You a Haskell for Great Good!
 
