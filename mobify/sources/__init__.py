@@ -3,6 +3,7 @@ from .aosabook import AosaBookSource
 from .blogspot import BlogSpotSource
 from .flask import FlaskSource
 from .harp import HarpMainSource
+from .haskell import HaskellSource
 from .histmag import HistmagSource
 from .medium import MediumSource
 from .readthedocs import ReadTheDocsBookSource
