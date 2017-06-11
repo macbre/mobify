@@ -47,7 +47,7 @@ class MediumSource(MobifySource):
         ])
 
     def get_title(self):
-        return self.get_node('//h1').strip()
+        return self.get_node('//meta[@property="og:title"]', attr='content').strip()
 
     def get_author(self):
         # <meta property="author" content="Eric Elliott">
