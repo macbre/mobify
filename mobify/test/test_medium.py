@@ -22,7 +22,7 @@ class MediumSourceTest(MobifyTestCase):
 
 
     def test_parsing(self):
-        assert self._source.get_title() == 'Assessing Employee Performance'
+        assert self._source.get_title() == 'Assessing Employee Performance – JavaScript Scene'
         assert self._source.get_author() == 'Eric Elliott'
         assert self._source.get_language() == 'en'
 
