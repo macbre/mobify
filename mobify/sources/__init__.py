@@ -2,6 +2,7 @@ from .artpl import NosferatuMainSource
 from .aosabook import AosaBookSource
 from .blogspot import BlogSpotSource
 from .flask import FlaskSource
+from .google_sre import GoogleSRESource
 from .harp import HarpMainSource
 from .haskell import HaskellSource
 from .histmag import HistmagSource
