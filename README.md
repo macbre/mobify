@@ -59,8 +59,10 @@ DEBUG=1 mobify ...
 ## Supported sources
 
 * Blogspot
+* dzieje.pl
 * histmag.org
 * medium.com
+* oreilly.com/ideas
 * readthedocs.io
 * Tumblr
 * Wikipedia
