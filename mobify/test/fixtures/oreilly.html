@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>The evolution of DevOps - O&#39;Reilly Media</title>
+
+  <!-- Meta -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:site" content="@OReillyMedia" />
+      <meta property="twitter:title" content="The evolution of DevOps" />
+      <meta property="twitter:description" content="Understanding the impact and expanding influence of DevOps culture, and how to apply DevOps principles to make your digital operations more performant and productive." />
+      <meta property="description:site" content="Understanding the impact and expanding influence of DevOps culture, and how to apply DevOps principles to make your digital operations more performant and productive." />
+      <meta property="twitter:url" content="https://www.oreilly.com/ideas/the-evolution-of-devops" />
+      <meta property="fb:pages" content="15137500430" />
+      <meta property="og:type" content="article" />
+      <meta property="og:site_name" content="O&#39;Reilly Media" />
+      <meta property="og:title" content="The evolution of DevOps" />
+      <meta property="og:description" content="Understanding the impact and expanding influence of DevOps culture, and how to apply DevOps principles to make your digital operations more performant and productive." />
+      <meta property="og:url" content="https://www.oreilly.com/ideas/the-evolution-of-devops" />
+      <meta property="article:published_time" content="2017-08-31T10:00:00Z" />
+      <meta property="article:author" content="Mike Loukides" />
+      <meta name="description" content="Understanding the impact and expanding influence of DevOps culture, and how to apply DevOps principles to make your digital operations more performant and productive." />
+      <meta name="author" content="Mike Loukides" />
+      <meta name="date" content="2017-08-31" />
+      <meta property="og:image" content="https://d3tdunqjn7n0wj.cloudfront.net/1400x933/black-and-white-2603593_1920-74ba3e45b134bb881ad88a3f0ab716cd.jpg" />
+      <meta property="twitter:image" content="https://d3tdunqjn7n0wj.cloudfront.net/1400x933/black-and-white-2603593_1920-74ba3e45b134bb881ad88a3f0ab716cd.jpg" />
+      <meta name="thumbnail" content="https://d3tdunqjn7n0wj.cloudfront.net/360x240/black-and-white-2603593_1920-74ba3e45b134bb881ad88a3f0ab716cd.jpg" />
+      <meta name="graphic_medium" content="https://d3tdunqjn7n0wj.cloudfront.net/360x240/black-and-white-2603593_1920-74ba3e45b134bb881ad88a3f0ab716cd.jpg" />
+      <meta name="oreilly:topic" content="Operations" />
+      <meta name="oreilly:keywords" content="velocity,devops,infrastructure,continuous delivery,cd,ci,docker,containers,microservices,lambda,faas,chaos engineering,culture,networkops,dataops,devsecops,noops,serverless,site reliability engineering,sre,bizops,hrops,marketingops,financeops,fintech,lean software,ux,enterprise" />
+  
+  
+
+  <!-- Assets -->
+  <script type="text/javascript" src="https://d3ebicv0uqgr7t.cloudfront.net/assets/application-bb2079ffdc.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://d3ebicv0uqgr7t.cloudfront.net/assets/application-7fbee17137.css">
+    
+  
+  <!-- Extra Assets -->
+  
+  
+  
+
+
+  <!-- Start Adobe Digital Tag Manager Header-->
+  <script type="text/javascript">
+    dataLayer = [];
+  </script>
+
+    <script src="//assets.adobedtm.com/cdb881fdfcc417bad9035bdbc61f4a2b2135b110/satelliteLib-2d3d7e7aff56a08b02334ccd859df32171807210.js"></script>
+  
+
+  <!-- End Adobe Digital Tag Manager Header-->
+
+  <script type="text/javascript">
+    // init app.events for all communication
+    app.events = new orm.Events();
+
+    var tempData = {"content_type":"text","flag":{"flag-slug":"operations","flag-title":"Operations","flag-url":"/topics/operations","parent-topic-slug":"operations"},"gateway_api_url":"https://gateway.oreilly.com","icons-svg":"/assets/icons-8812ab3f83.svg","post_info":{"byline":{"authors":[{"first-name":"Mike","last-name":"Loukides","url":"/people/1b7da-mike-loukides"}]},"excerpt":"\u003cp\u003eA few years ago, I wrote that DevOps is \u003ca href=\"https://www.oreilly.com/ideas/what-is-devops-yet-again?intcmp=il-webops-na-article-vlny17_the_evolution_of_devops_1\"\u003ethe movement that doesn't want to be defined\u003c/a\u003e. That's still true, though being cryptic doesn't help executives who need to understand what's going on in their industries, or who want to make their digital operations more productive. You may already have people in your company who are \"doing DevOps,\" or who want to. What are they doing? What do they want?\u003c/p\u003e\r\n\u003cp\u003eLet's start with origins. Back in 2008, O'Reilly Media ran the first \u003ca href=\"https://conferences.oreilly.com/velocity?intcmp=il-webops-confreg-article-vlny17_the_evolution_of_devops_2\"\u003eVelocity conference\u003c/a\u003e. Velocity was founded on the insight that web developers and web operations teams were often in conflict—yet they shared the same goals and the same language. It was an effort to gather the tribe into one room, to talk with each other and share insights. The DevOps movement \u003ca href=\"http://radar.oreilly.com/2011/06/velocity-operations-performance-mobile.html?intcmp=il-webops-na-article-vlny17_the_evolution_of_devops_3\"\u003egrew out of the early Velocity conferences\u003c/a\u003e, and shares the same goal: breaking down the invisible wall that separates developers from IT operations.\u003c/p\u003e","title":"The evolution of DevOps"},"post_slug":"the-evolution-of-devops","production":true,"segment_write":"c1bqZBPpSt05Stv3bKthxtFmC2etfgEK"};
+
+    var kalturaVideoId = "";
+    var kalturaAccount = "";
+    var kalturaPlayer = "";
+
+    // This should be genetated on the API directly.
+    tempData.allTopics = [{"flag-title":"Money","flag-slug":"money"},{"flag-title":"Internet of Things","flag-slug":"internet-of-things","parent-topic-slug":"data"},{"flag-title":"Open Source","flag-slug":"open-source","parent-topic-slug":"software-engineering"},{"flag-title":"Data marketplace","flag-slug":"data-marketplace","parent-topic-slug":"data"},{"flag-title":"Cognitive augmentation","flag-slug":"cognitive-augmentation","parent-topic-slug":"data"},{"flag-title":"Software Architecture","flag-slug":"software-architecture","parent-topic-slug":"software-engineering"},{"flag-title":"Economy","flag-slug":"economy"},{"flag-title":"Data science","flag-slug":"data-science","parent-topic-slug":"data"},{"flag-title":"Design and Business","flag-slug":"design-and-business","parent-topic-slug":"design"},{"flag-title":"Data perils","flag-slug":"data-perils","parent-topic-slug":"data"},{"flag-title":"Data design","flag-slug":"data-design","parent-topic-slug":"data"},{"flag-title":"Data","flag-slug":"data"},{"flag-title":"Data culture","flag-slug":"data-culture","parent-topic-slug":"data"},{"flag-title":"Software Engineering","flag-slug":"software-engineering"},{"flag-title":"Data Tools","flag-slug":"data-tools","parent-topic-slug":"data"},{"flag-title":"Design","flag-slug":"design"},{"flag-title":"Artificial intelligence","flag-slug":"artificial-intelligence","parent-topic-slug":"data"}];
+
+    // Add metrics, using a different write key for dev than for prod
+    injectSegment(tempData.segment_write)
+
+    $(function() {
+      app.metrics = new orm.Metrics();
+      app.metrics.pageView();
+
+      app.pageInit(tempData);
+
+      // load data into events so it dispatched 'data:loaded'
+      app.events.addData(tempData);
+    })
+  </script>
+
+  <!-- Start Visual Website Optimizer Asynchronous Code -->
+  <script type='text/javascript'>
+    var _vwo_code=(function(){
+    var account_id=244658,
+    settings_tolerance=2000,
+    library_tolerance=2500,
+    use_existing_jquery=false,
+  // DO NOT EDIT BELOW THIS LINE
+  f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+  </script>
+  <!-- End Visual Website Optimizer Asynchronous Code -->
+
+</head>
+<body class="body t-operations" data-section="ideas" >
+  <div class="flashes"></div>
+    <header id="page-header">
+  <div id="header-bar" class="t-bkg">
+    <h1 class="logo t-bkg" >
+  <a href="/" class=" logo-white ">
+  <svg role="heading" aria-label="O'Reilly">
+    <title>O'Reilly</title>
+    <use xlink:href="/assets/icons-8812ab3f83.svg#oreilly-logo"></use>
+  </svg>
+  </a>
+</h1>
+    <nav>
+              <a href="/ideas">Ideas</a>
+              <a href="https://www.safaribooksonline.com/home/?utm_medium=content&amp;utm_source=oreilly.com&amp;utm_campaign=lgen&amp;utm_content=20170601+nav">Learning Platform</a>
+              <a href="http://www.oreilly.com/conferences/">Conferences</a>
+              <a href="http://shop.oreilly.com/">Shop</a>
+      
+    </nav>
+
+
+    <div class="right invert">
+      <div id="search" class="hide">
+        <form class="search-form expanded" action="https://ssearch.oreilly.com" method="GET" target="_blank">
+  <label class="hide" for="text">Search </label> <input class="transparent" name="q" type="text" placeholder="Search..."/>
+  <a class="search-cta"><span class="icon icon-search   ">
+  <svg role="img">
+    <title>search</title>
+    <use xlink:href="/assets/icons-8812ab3f83.svg#search"></use>
+  </svg>
+</span></a>
+  <input class="hide" type="submit" value="Submit"/>
+</form>
+      </div>
+      <div id="user">
+        <!-- <a href="#feedback"  class="t-c--d feedback" id="feedback">Feedback</a> -->
+        <a class="t-c--d login" id="log-in-loading">Loading...</a>
+        <a href="?log-in" class="t-c--d login" id="log-in">Log in</a>
+        <a href="?log-out" class="t-c--d capture_end_session login" id="log-out">Log out</a>
+        <a href="/user/preferences"  class="t-c--d login" id="preferences"><span class="icon icon-configure icon--small t-fill ">
+  <svg role="img">
+    <title>configure</title>
+    <use xlink:href="/assets/icons-8812ab3f83.svg#configure"></use>
+  </svg>
+</span></a>
+      </div>
+    </div>
+    <a id="menu-toggle" class="invert" ><span class="icon icon-white icon-menu">
+  <svg role="img" id="close" class="is-hidden">
+    <title>Close Menu</title>
+    <use xlink:href="/assets/icons-8812ab3f83.svg#close"></use>
+  </svg>
+  <svg role="img" id="open">
+    <title>Open Menu</title>
+    <use xlink:href="/assets/icons-8812ab3f83.svg#menu"></use>
+  </svg>
+</span></a>
+  </div>
+     <div class="topics" >
+  <div class="scrollable">
+    <h3>On our radar</h3>
+    <div class="topics-list">
+              <div class="flag t-bkg--before bg-ai--before flag--xsmall">
+  
+            <a href="/topics/ai" >AI</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-business--before flag--xsmall">
+  
+            <a href="/topics/business" >Business</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-data--before flag--xsmall">
+  
+            <a href="/topics/data" >Data</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-design--before flag--xsmall">
+  
+            <a href="/topics/design" >Design</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-economy--before flag--xsmall">
+  
+            <a href="/topics/economy" >Economy</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-operations--before flag--xsmall">
+  
+            <a href="/topics/operations" >Operations</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-security--before flag--xsmall">
+  
+            <a href="/topics/security" >Security</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-software-engineering--before flag--xsmall">
+  
+            <a href="/topics/software-architecture" >Software Architecture</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-software-engineering--before flag--xsmall">
+  
+            <a href="/topics/software-engineering" >Software Engineering</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-web-programming--before flag--xsmall">
+  
+            <a href="/topics/web-programming" >Web Programming</a>
+    
+    
+  
+</div>
+      
+    </div>
+  </div>
+      <a href="/topics" class="t-bkg all-topics">See all</a>
+  
+</div>
+
+  
+  <div id="mobile-menu">
+
+    <nav>
+              <a href="/ideas">Ideas</a>
+              <a href="https://www.safaribooksonline.com/home/?utm_medium=content&amp;utm_source=oreilly.com&amp;utm_campaign=lgen&amp;utm_content=20170601+nav">Learning Platform</a>
+              <a href="http://www.oreilly.com/conferences/">Conferences</a>
+              <a href="http://shop.oreilly.com/">Shop</a>
+      
+    </nav>
+    <form class="search-form expanded" action="https://ssearch.oreilly.com" method="GET" target="_blank">
+  <label class="hide" for="text">Search </label> <input class="transparent" name="q" type="text" placeholder="Search..."/>
+  <a class="search-cta"><span class="icon icon-search   ">
+  <svg role="img">
+    <title>search</title>
+    <use xlink:href="/assets/icons-8812ab3f83.svg#search"></use>
+  </svg>
+</span></a>
+  <input class="hide" type="submit" value="Submit"/>
+</form>
+         <div class="topics" >
+  <div class="scrollable">
+    <h3>On our radar</h3>
+    <div class="topics-list">
+              <div class="flag t-bkg--before bg-ai--before flag--xsmall">
+  
+            <a href="/topics/ai" >AI</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-business--before flag--xsmall">
+  
+            <a href="/topics/business" >Business</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-data--before flag--xsmall">
+  
+            <a href="/topics/data" >Data</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-design--before flag--xsmall">
+  
+            <a href="/topics/design" >Design</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-economy--before flag--xsmall">
+  
+            <a href="/topics/economy" >Economy</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-operations--before flag--xsmall">
+  
+            <a href="/topics/operations" >Operations</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-security--before flag--xsmall">
+  
+            <a href="/topics/security" >Security</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-software-engineering--before flag--xsmall">
+  
+            <a href="/topics/software-architecture" >Software Architecture</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-software-engineering--before flag--xsmall">
+  
+            <a href="/topics/software-engineering" >Software Engineering</a>
+    
+    
+  
+</div>
+              <div class="flag t-bkg--before bg-web-programming--before flag--xsmall">
+  
+            <a href="/topics/web-programming" >Web Programming</a>
+    
+    
+  
+</div>
+      
+    </div>
+  </div>
+      <a href="/topics" class="t-bkg all-topics">See all</a>
+  
+</div>
+
+    
+  </div>
+
+</header>
+
+
+
+  <!-- Linked In -->
+  <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+  
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<main aria-live="polite">
+  <article class="article" itemscope itemtype="http://schema.org/Article">
+              <header class="article-header">
+        <div class="flag-follow " data-status="" id="">
+      <div class="flag t-bkg--before bg-operations--before flag--small">
+  
+            <a href="/topics/operations" >Operations</a>
+    
+    
+  
+</div>
+  
+  <span class="cta">
+    <span class="icons">
+      
+      
+    </span>
+    <span class="messages">
+      
+      
+    </span>
+</span>
+</div>
+
+  
+  
+
+  
+
+  <h1 class="title t-c" itemprop="headline">The evolution of DevOps</h1>
+
+      <p class="dek" itemprop="alternativeHeadline">Understanding the impact and expanding influence of DevOps culture, and how to apply DevOps principles to make your digital operations more performant and productive.</p>
+  
+
+  <div class="byline">
+  By <span class="author" itemscope itemtype="http://schema.org/Person"><a href="/people/1b7da-mike-loukides" itemprop="name">Mike Loukides</a></span>
+</div> <time class="date">August 31, 2017</time>
+
+</header>
+
+      
+
+      <div class="article-body" itemprop="articleBody">
+        
+                              <figure class="article-image right">
+  <img src="https://d3tdunqjn7n0wj.cloudfront.net/360x240/black-and-white-2603593_1920-74ba3e45b134bb881ad88a3f0ab716cd.jpg" alt="Black and White" srcset="https://d3tdunqjn7n0wj.cloudfront.net/360x240/black-and-white-2603593_1920-74ba3e45b134bb881ad88a3f0ab716cd.jpg 360w, https://d3tdunqjn7n0wj.cloudfront.net/720x480/black-and-white-2603593_1920-74ba3e45b134bb881ad88a3f0ab716cd.jpg 720w, https://d3tdunqjn7n0wj.cloudfront.net/1440x960/black-and-white-2603593_1920-74ba3e45b134bb881ad88a3f0ab716cd.jpg 1440w" sizes="(min-width: 1390px) 420px, (min-width: 600px) 45vw, 100vw" class=""/>
+  <figcaption>Black and White
+          <span class="source-name">
+                  (source: <a class="secondary" target="_blank" href="https://pixabay.com/en/black-and-white-stairs-stairway-2603593/">StockSnap</a>)
+        
+        
+      </span>
+    
+    
+  <figcaption>
+
+</figure>
+          
+                      <aside data-type="note">
+  <p><a href="https://conferences.oreilly.com/velocity/vl-ny?intcmp=il-webops-confsched-na-vlny17_new_site_the_evolution_of_devops_b18_top">Register for the O’Reilly Velocity Conference</a>,  taking place Oct. 1-4 in New York, to learn more about how to leverage DevOps at your organization.</p>
+</aside>
+
+          
+        
+
+        
+
+        <p>A few years ago, I wrote that DevOps is <a href="https://www.oreilly.com/ideas/what-is-devops-yet-again?intcmp=il-webops-confsched-info-vlny17_new_site_the_evolution_of_devops_b1">the movement that doesn't want to be defined</a>. That's still true, though being cryptic doesn't help executives who need to understand what's going on in their industries, or who want to make their digital operations more productive. You may already have people in your company who are "doing DevOps," or who want to. What are they doing? What do they want?</p>
+
+<p>Let's start with origins. Back in 2007, a Belgian engineer named Patrick Debois became frustrated by the friction between developer and operations teams. As a developer and a member of the Agile community, Debois saw an opportunity to use Agile methodologies to manage infrastructure management process, much like developers manage development process. He initially described this concept as Agile Infrastructure but later coined the phrase DevOps, a portmanteau of development and operations.</p>
+
+<p>Then, in 2008, O'Reilly Media ran the first <a href="https://conferences.oreilly.com/velocity?intcmp=il-webops-confsched-info-vlny17_new_site_the_evolution_of_devops_b2">Velocity conference</a>. Velocity was founded on the same insight: that web developers and web operations teams were often in conflict, yet shared the same goals and the same language. It was an effort to <a href="http://radar.oreilly.com/2011/06/velocity-operations-performance-mobile.html?intcmp=il-webops-na-article-vlny17_new_site_the_evolution_of_devops_b3">gather the tribe into one room</a>, to talk with each other and share insights. Much of the DevOps movement grew out of <a href="https://www.youtube.com/watch?v=LdOe18KhtT4">the early Velocity conferences</a>, and shares the same goal: breaking down the invisible wall that separates developers from IT operations.</p>
+
+<p>Why break down that wall? Because, as websites became larger and more complex, it was painfully obvious that the wall was hindering, rather than helping. DevOps grew up with the largest sites on the web; the ideas behind it came from sites like Amazon, Google, Flickr, Facebook, and YouTube, and from learning how to deal with these sites as they became monsters. It's based on the hard-earned experience of seeing websites grow from one server, to a dozen, to thousands.</p>
+
+<p>As websites became larger and more complex, the business consequences of downtime, or of poor performance, skyrocketed. The business realities of running these giant sites forced developers and operations to unite. Operations wasn't something you could let the Ops group worry about when you declared your project finished. The boundary between development and operations was blurring. To build sites that perform well, scale to millions of users, and are always up, you can't separate development from operations.</p>
+
+<p>You also can’t build websites that perform well and scale if you’re working with development processes that are more appropriate to shrink-wrapped software. Working at “web speed” demands frequent updates: to fix bugs and improve performance, sure, but also to add new features and stay ahead of the competition. When you’re working at web speed, standing still is moving backwards. These sites were quick to develop the processes that became known as continuous deployment (CD), in which software is deployed to the field frequently—often many times a day. CD also requires developers to write software that could be put into production directly; they had to understand how operations works, and how their software fits into an automated deployment pipeline. They couldn’t throw software over a wall and let another team spend time getting it working in the field.</p>
+
+<p>Cloud computing appeared at roughly the same time, and made the boundary between development and operations even more fuzzy. You can't develop for the cloud without understanding operations, and you can't operate software in the cloud without understanding development. You never touch the servers; it’s all software.</p>
+
+<p>So that's how DevOps began: by eliminating the barrier between the people who develop the software and the people who operate it. Push the words together and call it a movement. That simple origin myth hides a lot of complexity, but it will suffice.</p>
+
+<h2>Automation and operations at scale</h2>
+
+<p>DevOps was the inevitable outcome of building and operating the sites that became the web's giants. It's a native in the world of complex distributed systems and the cloud. And to understand DevOps, you need to think about how every site—not just the Internet monsters—has changed over the past two decades.</p>
+
+<p>When I started at O'Reilly, Tim O'Reilly pointed to a PC sitting on a chair and said, "That's oreilly.com." He can't do that anymore. Nobody can. Like any successful business, O'Reilly runs across many servers: at co-location facilities, at Amazon and at Google, at CDNs like Akamai and Fastly. Some bits of it are in-house; most of it isn't. Some of it isn't even ours: we rely on many external services. Our reliability and performance depend as much on these services as on the services we own and control. It's a complex, multi-tiered distributed system.</p>
+
+<p>When oreilly.com was a single computer sitting on a chair, someone could log in on a console terminal and install updates, fix things, or reboot if something went wrong. (If memory serves, that console terminal was sitting on another chair, next to the one with the computer.) Now that oreilly.com is thousands of computers distributed world-wide, you can't just log in and do an upgrade. You can't give a few commands and reload the site.</p>
+
+<p>At this scale, automation isn't an option. It's a requirement. The slogan goes <a href="https://www.safaribooksonline.com/library/view/infrastructure-as-code/9781491924334/?intcmp=il-webops-books-videos-product-vlny17_new_site_the_evolution_of_devops_b4">infrastructure as code</a>; the reality is that infrastructure <em>is</em> code. Software has eaten the hardware. You need the ability to install and update software across your whole network. It's no longer a matter of pushing an update to the web server or the database server by hand; it's pushing updates to thousands of servers, and doing it correctly every time. It's no longer taking a new computer out of a box and installing an operating system and application software by hand; it's dealing with physical machines by the rack, or with virtual machines and Amazon instances by the gross. It's ensuring that all of these machines are configured correctly and identically. That can only be done by automating the process. And the way we automate is to write software.</p>
+
+<p>System administrators used to be heavily involved with shipping and receiving: receiving new hardware, setting it up, configuring it, with each box likely to have a custom configuration. These days, operations staff may rarely see a computer other than their laptop: the machines that do the work are virtual, they live at Amazon or at Microsoft or at Google or at IBM. The job is no longer “racking and stacking”; it’s writing and managing the infrastructure software that keeps everything going. Yes, physical infrastructure still exists, somewhere. But the code that keeps that infrastructure running is what’s important.</p>
+
+<p>In this new world, developers can't just build new features in the lab, and then expect operations to take over and deploy the new software. Developers also need to understand how the systems are configured and how the software is deployed, because it's being installed across thousands of machines, both virtual and physical. They need to work with the Ops team to build and maintain the deployment process, because that process is now software.</p>
+
+<h2>Continuous deployment</h2>
+
+<p>The practice of <a href="https://www.safaribooksonline.com/library/view/continuous-delivery-reliable/9780321670250/?utm_source=oreilly&amp;utm_medium=newsite&amp;utm_campaign=the_evolution_of_devops_b5">continuous deployment</a> (an extension of <a href="https://www.safaribooksonline.com/library/view/continuous-delivery/9780134389363/?utm_source=oreilly&amp;utm_medium=newsite&amp;utm_campaign=the_evolution_of_devops_b6">continuous delivery</a>), or CD, came out of the seminal websites. CD is built on ideas from the Agile movement, for which a key idea was frequent software releases: every week or two. CD pushes the idea of “frequent releases” a lot farther; releases can take place many times a day. How many times a day? New software developers at Facebook typically push a change to the site <a href="https://blog.capabiliti.co/employee-onboarding-facebook-google-apple/">their first day on the job</a>. Given the number of developers Facebook hires, that's a lot of updates—but more than that, developers are trained from day one to push changes to production frequently. Updates at that scale can't happen by hand. Not only is it impractical, it's error-prone, even at scales much smaller than Facebook's. Updates must be tested and pushed to servers automatically. Frequently, updates are only sent to a small number of servers until it's clear that the update is stable, or that it actually improves the user's experience.</p>
+
+<p>Each update represents a single small change to the system. Because each update is only a small, easily understood change, there's minimal risk in deploying it. It's just a single bug fix or enhancement, not a year’s worth of fixes rolled up into a major release. If something goes wrong, it’s easy to roll back. If there’s an A/B testing framework in place, it’s easy to deploy the change to a few servers, and see if performance (by whatever metric is appropriate: raw speed, click-through, user satisfaction) improves. The biggest advantage of frequent, small changes, though, is that they’re small: they’re easily understood, they don’t “break the world.”</p>
+
+<p>Continuous deployment requires, minimally, a revision control system; tools for continuous integration and testing; and tools for automated configuration and deployment. There are open source and commercial products for all of these functions.</p>
+
+<p>It’s possible to push continuous deployment a lot further. Containers such as <a href="https://www.safaribooksonline.com/library/view/learning-path-delivering/9781491989012/?utm_source=oreilly&amp;utm_medium=newsite&amp;utm_campaign=the_evolution_of_devops_b7">Docker</a> go a long way towards minimizing the gap between development systems and production systems; developers can work on their laptop in an environment that’s almost identical to production, and can ship software that has been packaged to fit seamlessly into the production environment. <a href="https://www.safaribooksonline.com/library/view/kubernetes-up-and/9781491935668/?utm_source=oreilly&amp;utm_medium=newsite&amp;utm_campaign=the_evolution_of_devops_b20">Kubernetes</a> helps to manage large numbers of containers in production. <a href="https://www.safaribooksonline.com/library/view/the-principles-of/9781491935811/?utm_source=oreilly&amp;utm_medium=newsite&amp;utm_campaign=the_evolution_of_devops_b8">Microservice</a> architectures split complex software systems into groups of independent services, each of which can be developed and deployed separately. Serverless architectures, based on services like <a href="https://aws.amazon.com/lambda/">AWS Lambda</a>, push the concept of microservices down to individual functions.</p>
+
+<p>You don’t need to push to the coolest, most buzzword-compliant development practices and architectures. But you do need the ability to update your software systems reliably and confidently at a moment’s notice. That’s what continuous deployment is all about.</p>
+
+<h2>Performance and reliability</h2>
+
+<p>When you're talking about thousands of systems delivering your services, you also need to know that they're running properly. Monitoring is critical to modern operations: How do you know all your servers are running? How do you know they're healthy? How do you know that your network connections are all working? Are your users leaving because they’re tired of waiting for the site to load? If you have 1000 servers and 2 are down, will there be 500 down in 10 minutes? Or can you just start a couple of new AWS instances and consider the problem solved?</p>
+
+<p>A modern site has to be concerned with performance, even when all the systems are running. A groundbreaking <a href="https://www.youtube.com/watch?v=bQSE51-gr2s">talk</a> from Velocity 2009 showed that delays as small as 100 milliseconds—too small to be consciously noticeable—caused measurable numbers of users to click away. Time is money, indeed; and developers and Ops staff need to work together to ensure that their sites deliver good, consistent performance. Customers are even less willing to wait online than in brick-and-mortar stores.</p>
+
+<p>Performance and reliability are issues that DevOps deals with constantly. When you have a complex system that's spread across the globe, you can't measure performance and uptime by logging into your servers by hand. You need automation, but automation isn’t enough by itself. You also need tools that can measure performance as your users see it. It’s not enough just to prove that your servers are still online. That requires <a href="https://www.safaribooksonline.com/library/view/practical-monitoring/9781491957349/?utm_source=oreilly&amp;utm_medium=newsite&amp;utm_campaign=the_evolution_of_devops_b21">state-of-the-art systems for logging and monitoring</a>.</p>
+
+<p>Capacity planning is critical to keeping your customers satisfied. Can your site handle a 100-fold increase in load on Black Friday? What happens if a new product is unexpectedly successful? Performance and reliability aren’t just a matter of making the site run well during normal conditions; it’s knowing that your systems can handle peak loads without degraded performance. It isn’t enough to say that the site is fine, and your customers will tolerate it if it’s occasionally bad, because they won’t. They’ll go away—just when you want them most. Capacity planning is about knowing that you can handle both normal and abnormal loads: that you can bring additional servers online, and get them running quickly. Cloud computing may simplify the problem, but it certainly doesn’t eliminate it.</p>
+
+<p>Even if you don't think your business is a web business, it has almost certainly grown to a scale where you're running dozens of servers at multiple locations. This is a DevOps world.</p>
+
+<h2>Failure is inevitable</h2>
+
+<p>Perhaps the most thankless task of any operations group is getting things working again after something has gone wrong. Operations groups have to be concerned with performance and resilience. What happens if network outages occur, or a disk drive suddenly fails? If the database server dies, can you survive?</p>
+
+<p>There are many ways to make sites more resilient. Netflix has pioneered the most intriguing: they advocate a practice called <a href="http://www.oreilly.com/webops-perf/free/chaos-engineering.csp?intcmp=il-webops-na-lp-vlny17_new_site_the_evolution_of_devops_b9">chaos engineering</a>, in which software periodically and randomly "breaks things": it shuts down servers, misconfigures networks, and so on. Chaos engineering acknowledges that outages are a part of normal operation, and that practice is the only way to deal with them. A team that’s aware that something could break at any moment, and that is confident it can fix whatever problems arise, will deal with problems promptly and effectively. Chaos engineering also acknowledges that you can't fix problems that you're not aware of, and that in a complex system, it's difficult to predict trouble areas in advance. Breaking things at random is a more effective way to flush out trouble spots than having meetings to discuss what might fail. While chaos engineering sounds terrifying, it's very difficult to argue with Netflix's success in maintaining a stable, high-performance platform.</p>
+
+<h2>The culture of DevOps</h2>
+
+<p>There's a continual debate within the DevOps community about whether DevOps is fundamentally about culture, or whether it's about processes (like CD) and tools. I'm sympathetic to the idea that DevOps is first and foremost about creating a culture in which developers and Ops staff work with each other with mutual respect. But to take either side of this debate by itself invites trouble. <a href="https://www.safaribooksonline.com/library/view/effective-devops/9781491926291/?utm_source=oreilly&amp;utm_medium=newsite&amp;utm_campaign=the_evolution_of_devops_b10"><em>Effective DevOps</em></a> is a good resource for balancing the roles of culture, methodology, and tools.</p>
+
+<p>Many tools are associated with DevOps. I've mentioned some of them (in a very general way). But one of the biggest mistakes management can make is mistaking the tools for the reality. "We use Chef to automate deployment" doesn't mean you're doing DevOps. All too often, we see organizations that "automate deployment" without changing anything about how they work: they're using the tool, but they're still doing big, complex, multi-feature releases. Or they’re using the tool in production, but not in development. Managers need to avoid "cargo culting" at all costs: adopting the terminology and the tools without changing anything significant.</p>
+
+<p>A less common, but equally fatal, mistake is to swallow uncritically the line that DevOps is about culture, not tools. So gather all your devs and Ops staff around a campfire and sing Kum Bah Yah. DevOps is all about automating everything that can reasonably be automated, and that inevitably involves tooling. You'll see tools for testing, for continuous integration, for automated configuration and deployment, for creating containers, for managing your services, and more—even for randomly breaking things. The tools can't be ignored.</p>
+
+<p>Focus entirely on culture, or entirely on tools, and you'll lose. You need both.</p>
+
+<h3>Blameless postmortems</h3>
+
+<p>Complex systems fail. Any operations group needs to deal with system failure, and to evaluate what happened after a failure. All too often, postmortem analysis takes the form of assigning blame: figuring out who or what caused the event, and in the process, being blind to the complex nature of what happened.</p>
+
+<p>Blameless postmortems are an important cultural practice for dealing with system failure. The appropriate response to failure isn't figuring out who to blame, finding a single root cause, or putting in place procedures that try to prevent what just happened from happening again. A postmortem is about understanding exactly what happened, piecing together the complex chain of events that led up to the failure, so that the system as a whole can be improved. In modern distributed systems, most outages are a result of a "perfect storm": several events, none of which would be a problem in itself, combine to bring the system down. Analyzing the storm can't happen when people are afraid of being blamed. And without understanding what happened, you can't make the system more resilient: more resistant to failure, and easier to manage correctly.</p>
+
+<h2>OtherOps</h2>
+
+<p>The ideas behind DevOps have been extended into other fields, so you will often see other words mashed up with Ops. Here are a few; you’ll undoubtedly find more.</p>
+
+<h3>NetworkOps</h3>
+
+<p>The most natural extension of DevOps is <a href="http://www.networkworld.com/article/3187405/lan-wan/netops-can-networks-be-both-available-and-agile.html">NetworkOps</a>. DevOps started with web servers, and with the mantra "configuration as code." But the network operations staff lived in a different world. The world of network operations was dominated by heavy iron and miles of cable that could only be managed by going to a physical console and typing commands in a proprietary configuration language.</p>
+
+<p>Network infrastructure has become much more manageable in the last decade. There's no reason that network operations can't take advantage of the configuration and deployment tools used by the rest of your staff. Store your network configurations in a revision control system, and automate the process of changing configurations, so it's easy to back out changes that don't work. If your application lives in the cloud, you may have to manage a VPN on Amazon, and the only way to do that is through software.</p>
+
+<p>The development of software-defined networking and network function virtualization takes this trend several steps further. Network configuration can be incorporated directly into the application. You don't manage your network through proprietary configuration languages, such as Cisco’s IOS and Juniper Networks’ JunOS; you call libraries from Python or Java. The network is code; the wires and the big expensive hardware are all secondary. And since the network is code, network operations becomes part of the whole DevOps cycle.</p>
+
+<h3>DataOps</h3>
+
+<p>Structurally, data science isn't all that different from the web. You have programmers and developers who build software that runs on a complicated infrastructure: many different databases, platforms like Hadoop and Spark, libraries and frameworks ranging from basic statistics to AI.</p>
+
+<p>It isn't surprising, then, that a distinction between data developers and data operations has appeared. It’s still common for a developer to create a small-scale prototype, and hand it over to a data engineer to be turned into a product and deployed at scale. However, we’re seeing data operations integrated into data science groups. There's even a new specialty, called "<a href="https://www.oreilly.com/ideas/what-are-machine-learning-engineers?intcmp=il-webops-na-article-vlny17_new_site_the_evolution_of_devops_b11">machine learning engineer</a>," that deals with the transition between prototypes and well-engineered products that run at scale. ML engineering includes tasks that are unique to data science, such as monitoring applications to determine when models need to be updated.</p>
+
+<p>As with DevOps, distinct specialties aren't a problem; problems arise when the specialties become silos that prevent communication.</p>
+
+<h3>DevOpsSec</h3>
+
+<p><a href="https://www.oreilly.com/ideas/what-are-machine-learning-engineers?intcmp=il-webops-free-na-vlny17_new_site_the_evolution_of_devops_b12">DevOpsSec</a> brings security into the DevOps world. Superficially, it seems that security should go hand-in-hand with slow, careful inspection of code, auditing, and careful and painstaking adherence to requirements. You've probably noticed: that isn't working. There's certainly an argument to be made that security is better served by the ability to make and deploy changes rapidly. There’s also an argument to be made that rapid deployment without security is suicidal. And it’s certainly true that automating deployment is less error-prone, and exposes all the details of your configuration, so nothing is left to chance. If you’re installing patches in response to an incident, you need to be confident that the patches are installed correctly, and don’t leave you more vulnerable than you were before.</p>
+
+<p>There's also a cultural argument for DevOpsSec. In many companies, security teams are isolated from development and operations groups; not only do they not work together, at many companies they dislike each other intensely. Fixing the divide between security, development, and operations staff is the first step towards security that works.</p>
+
+<h3>NoOps</h3>
+
+<p>A few years ago, some people in the operations community pointed to the possibility of putting all the servers in the cloud, and automating all the administrative tasks, so that an operations group wasn't needed. NoOps: everything would run itself. More recently, we've heard the same thing about "serverless": If we're building serverless architectures, there are no servers, and hence no need for operations. Right?</p>
+
+<p>Wrong. You can (and should) do as much as you reasonably can to automate operations. I don't think anyone would disagree with that. But <a href="http://radar.oreilly.com/2012/06/what-is-devops.html?intcmp=il-webops-na-article-vlny17_new_site_the_evolution_of_devops_b13">don't think that you're eliminating Ops as a result</a>. Operations never disappears; it changes shape.</p>
+
+<p>What you're really doing when you automate everything and move it to the cloud isn't eliminating operations. You're increasing the size of the system that can be managed by a fixed-sized operations staff. You're giving staff the time they need to work on more serious, long-term problems rather than firefighting. Over the years, we've seen the ratio of computers to sysadmins go from one-to-many (more operators and administrators than computers) to thousands-to-one (many computers managed by a small staff). That's a good thing. Nobody in DevOps disagrees with that. But it doesn't make operations go away; there are still going to be traffic spikes, bugs, network failures, other infrastructure failures, security incidents, and so on.</p>
+
+<p>The <a href="http://www.oreilly.com/programming/free/what-is-serverless.csp?intcmp=il-webops-free-lp-vlny17_the_evolution_of_devops_b22">serverless computing</a> (a.k.a. "Function as a Service") paradigm presents a slightly different set of issues, but the big picture is the same. When you break applications up into individual functions running in the cloud, what you really have is more servers, rather than fewer. The resulting architecture is likely to be more complex, not less. Yes, the cloud provider can do a lot to make your platform scale automatically, deal with failure, and all of that. But making sure the whole system works and is responsive is your job, and it isn't going away. This isn't to say that serverless isn't important; it is. It just doesn't make operations disappear. At its best, serverless enables a fixed-sized team to manage an even larger, more complex application.</p>
+
+<h3>SRE: It's not even called Ops</h3>
+
+<p>You'll probably see the term <a href="https://www.safaribooksonline.com/library/view/site-reliability-engineering/9781491929117/?utm_source=oreilly&amp;utm_medium=newsite&amp;utm_campaign=the_evolution_of_devops_b14">site reliability engineering</a> (SRE). SRE is Google's flavor of DevOps. There are some insignificant squabbles about whether DevOps developed from SRE, or the other way around. Ignore that noise.</p>
+
+<p>Compared to DevOps, SRE is more formal. It's certainly appropriate at Google scale. If you're not at Google scale, it's something to aspire to. It shouldn't surprise anyone that Google has some ideas about making extremely large software systems work. And one of the most important changes in DevOps over the last decade is the fact that Google is now talking openly about how they make their systems work. Even if you're nowhere near Google’s scale, take advantage of their work: learn from them and adapt what you can to your situation.</p>
+
+<h3>BizOps</h3>
+
+<p>One of many rarely-stated themes in DevOps is the necessity of living with constant change. Continuous deployment, cloud infrastructure that’s allocated and deployed at a moment’s notice, microservice architectures: these are all great for the technical teams, but frequently leave the business side behind. How do you get alignment between the organization’s business requirements and its DevOps practice? How do you budget and plan in a world where everything is constantly changing? As Leon Fayer <a href="http://fayerplay.com/devopsdays-bizops-and-you/">writes</a>, the goal of DevOps isn’t to build cool stuff; it’s to support the business. That’s BizOps.</p>
+
+<h3>Even more Ops</h3>
+
+<p>I've also seen HROps, MarketingOps, FinanceOps, and several other Ops. These ideas tend to borrow a lot from the Lean Software movement. If there’s a single theme, it’s about helping these groups to work in an environment of constant change. How do you market when tomorrow’s product may be different from today’s? Even in traditional business, the reality of planning is that plans are necessary, but plans never survive their confrontation with reality: change is a constant. Can you turn distrust of change into an advantage by stressing agility and responsiveness? If you're interested, I strongly recommend <a href="https://www.safaribooksonline.com/library/view/lean-enterprise/9781491946527/?utm_source=oreilly&amp;utm_medium=newsite&amp;utm_campaign=the_evolution_of_devops_b15"><em>Lean Enterprise</em></a> and <a href="https://www.safaribooksonline.com/library/view/lean-ux-2nd/9781491953594/?utm_source=oreilly&amp;utm_medium=newsite&amp;utm_campaign=the_evolution_of_devops_b16"><em>Lean UX</em></a>.</p>
+
+<h2>Doing DevOps</h2>
+
+<p>How do you get an organization "doing DevOps"? "Doing DevOps" isn't that good a phrase, but there are some answers. Don't go out and hire a bunch of "DevOps specialists." Thinking about DevOps as a distinct specialty misses the point: DevOps is about getting existing groups working together, not about creating a new specialty or a new group. Definitely don't go out and pick new DevOps-friendly office furniture. (I won't give you the link, but that's not a joke.) Seriously: mistakes like these send the message that you don't know what you're looking for, and will drive away the people you really want to hire. Though you may end up with better office decor.</p>
+
+<p>If you want to get started with DevOps, start small. It started as a grassroots movement, so let it be a grassroots movement at your company. Pick a project—perhaps something new, perhaps something that's been a problem in the past—and see what happens when you get the development and the operations groups working together. See what happens when you build pipelines for continuous deployment, use modern tools for monitoring, and get your developers and operations staff talking to one another. A top-down “We are now going to do DevOps across the company” message is likely to fail. Instead, start small, and let everyone see the results. The report <a href="http://www.oreilly.com/webops-perf/free/devops-in-practice.csp?intcmp=il-webops-free-na-vlny17_new_site_the_evolution_of_devops_b17"><em>DevOps in Practice</em></a> shows how DevOps was introduced at Nordstrom and the Texas state government.</p>
+
+<p>You don't need to start with the project that's most excited about doing DevOps—that might backfire. It's hard to evaluate your progress if everyone is heavily invested in seeing a new practice succeed. By the same token, you should probably avoid groups that are resistant to change, or that see ideas like DevOps as a fate worse than death. They'll only be convinced when they see results in other groups.</p>
+
+<p>It doesn't matter a whole lot where you start, as long as you start. DevOps isn't about heroes, rock stars, ninjas, or unicorns; it's about regular developers and Ops staff getting out of their silos and working with each other. It’s about automating everything that can reasonably be automated, because doing so reduces the time spent fighting fires and increases the time you can spend improving your products and services. Ultimately, that’s what’s important.</p>
+
+        
+        
+                              <aside data-type="note">
+  <p><a href="https://conferences.oreilly.com/velocity/vl-ny?intcmp=il-webops-confsched-na-vlny17_new_site_the_evolution_of_devops_b19_end">Register for the O’Reilly Velocity Conference</a>,  taking place Oct. 1-4 in New York, to learn more about how to leverage DevOps at your organization.</p>
+</aside>
+
+          
+        
+
+                      <div class="image-credit">
+  Article image: Black and White
+          <span class="source-name">
+                  (source: <a class="secondary" target="_blank" href="https://pixabay.com/en/black-and-white-stairs-stairway-2603593/">StockSnap</a>).
+        
+        
+      </span>
+    
+    
+</div>
+          
+
+          
+
+        </div>
+      </div>
+
+        <div class="article-meta">
+
+  <div class="article-share">
+  <div class="article-share-text"> Share </div>
+  <ol>
+    <li><a href="https://twitter.com/share" class="twitter-share-button" data-via="oreillymedia" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></li>
+    <li>  <div class="fb-share-button" 
+    data-href="https://www.oreilly.com/ideas/the-evolution-of-devops" 
+    data-layout="button_count">
+  </div></li>
+    <li><script type="IN/Share" data-url="https://www.oreilly.com/ideas/the-evolution-of-devops" data-counter="right"></script></li>
+  </ol>
+  <hr>
+</div>
+
+  
+
+      <article class="block block-common with-img person with-link">
+    <div class="thumb">
+    <div class="features">
+    
+    </div>
+        <a href="/people/1b7da-mike-loukides"><img src="https://d3tdunqjn7n0wj.cloudfront.net/360x360/mike-loukides-crop-b7719fefe24cc1ed26919575bde11961.jpg" alt="Mike Loukides" srcset="https://d3tdunqjn7n0wj.cloudfront.net/360x360/mike-loukides-crop-b7719fefe24cc1ed26919575bde11961.jpg 360w, https://d3tdunqjn7n0wj.cloudfront.net/720x720/mike-loukides-crop-b7719fefe24cc1ed26919575bde11961.jpg 720w, https://d3tdunqjn7n0wj.cloudfront.net/1440x1440/mike-loukides-crop-b7719fefe24cc1ed26919575bde11961.jpg 1440w"  class=""/></a>
+    
+    
+  </div>
+  
+
+  
+
+  
+
+  <div class="text-group">
+    
+
+        <h2 class="block-title">
+          <a href="/people/1b7da-mike-loukides">Mike Loukides</a>
+    
+    
+    </h2>
+    
+
+    
+          <p class="dek">Mike Loukides is Vice President of Content Strategy for O'Reilly Media, Inc. He's edited many highly regarded books on technical subjects that don't involve Windows programming. He's particularly interested in programming languages, Unix and what passes for Unix these days, and system and network administration. Mike is the author of System Performance Tuning and a coauthor of Unix Power Tools. Most recently, he's been fooling around with data and data analysis, languages like R, Mathematica, and Octave, and thinking about how to make books soc...</p>
+
+    
+          <a class="btn btn--xsmall" style="float: right;" href="/people/1b7da-mike-loukides">more</a>
+    
+  </div>
+</article>
+
+  
+
+</div>
+
+
+        <hr class="t-bkg section-divider" />
+
+
+        <aside class="article-related">
+      <section class="block-rows columns-4 ">
+
+    
+
+    <section class="block-group">
+                <article class="block block-common with-img inset-flag">
+    <div class="thumb">
+    <div class="features">
+    
+    </div>
+        <a href="/ideas/understanding-the-elk-stack"><img src="https://d3tdunqjn7n0wj.cloudfront.net/360x240/operations-stacked-logs-crop-c15a5659ee3f36d47a4923f7daccc175.jpg" alt="Stacked logs" srcset="https://d3tdunqjn7n0wj.cloudfront.net/360x240/operations-stacked-logs-crop-c15a5659ee3f36d47a4923f7daccc175.jpg 360w, https://d3tdunqjn7n0wj.cloudfront.net/720x480/operations-stacked-logs-crop-c15a5659ee3f36d47a4923f7daccc175.jpg 720w, https://d3tdunqjn7n0wj.cloudfront.net/1440x960/operations-stacked-logs-crop-c15a5659ee3f36d47a4923f7daccc175.jpg 1440w" sizes="(min-width: 1390px) 310px, (min-width: 1000px) 25vw, (min-width: 600px) 50vw, 100vw" class=""/></a>
+    
+    
+  </div>
+  
+
+  
+
+      <div class="flag t-bkg--before flag--inset bg-operations--before">
+  
+            <a href="/topics/operations" >Operations</a>
+    
+    
+  
+</div>
+  
+
+  <div class="text-group">
+    
+
+        <h2 class="block-title">
+          <a href="/ideas/understanding-the-elk-stack">Understanding the ELK stack</a>
+    
+    
+    </h2>
+    
+
+          <div class="byline">
+  By <span class="author" itemscope itemtype="http://schema.org/Person"><a href="/people/brian_anderson" itemprop="name">Brian Anderson</a></span><span class="author" itemscope itemtype="http://schema.org/Person"><a href="/people/d05d7-rafa-ku" itemprop="name">Rafał Kuć</a></span>
+</div>
+    
+          <p class="dek">Five questions for Rafał Kuć: Insights on what sets the ELK stack apart from other log management solutions, common user pitfalls, and tips for getting started.</p>
+
+    
+    
+  </div>
+</article>
+
+                <article class="block block-common with-img inset-flag">
+    <div class="thumb">
+    <div class="features">
+    
+    </div>
+        <a href="/ideas/its-usability-all-the-way-down"><img src="https://d3tdunqjn7n0wj.cloudfront.net/360x240/2654032126_31dfed74b0_o-9b2b490e1a61dbfca6875db7206ecb64.jpg" alt="arne jacobsen, central steel staircase, rødovre town hall, 1952-1956" srcset="https://d3tdunqjn7n0wj.cloudfront.net/360x240/2654032126_31dfed74b0_o-9b2b490e1a61dbfca6875db7206ecb64.jpg 360w, https://d3tdunqjn7n0wj.cloudfront.net/720x480/2654032126_31dfed74b0_o-9b2b490e1a61dbfca6875db7206ecb64.jpg 720w, https://d3tdunqjn7n0wj.cloudfront.net/1440x960/2654032126_31dfed74b0_o-9b2b490e1a61dbfca6875db7206ecb64.jpg 1440w" sizes="(min-width: 1390px) 310px, (min-width: 1000px) 25vw, (min-width: 600px) 50vw, 100vw" class=""/></a>
+    
+    
+  </div>
+  
+
+  
+
+      <div class="flag t-bkg--before flag--inset bg-operations--before">
+  
+            <a href="/topics/operations" >Operations</a>
+    
+    
+  
+</div>
+  
+
+  <div class="text-group">
+    
+
+        <h2 class="block-title">
+          <a href="/ideas/its-usability-all-the-way-down">It’s usability all the way down</a>
+    
+    
+    </h2>
+    
+
+          <div class="byline">
+  By <span class="author" itemscope itemtype="http://schema.org/Person"><a href="/people/818a7-jeff-sussna" itemprop="name">Jeff Sussna</a></span>
+</div>
+    
+          <p class="dek">Designing, building, and operating services from the perspective of customer goals helps improve quality.</p>
+
+    
+    
+  </div>
+</article>
+
+                <article class="block block-common with-img inset-flag">
+    <div class="thumb">
+    <div class="features">
+    
+    </div>
+        <a href="/ideas/ghosts-in-the-machines"><img src="https://d3tdunqjn7n0wj.cloudfront.net/360x240/6432099557_bcb0630c3c_o-d762a9dae2918ed0c2a0462c788db0f6.jpg" alt="Favorittbilde #15. Ukas bilde" srcset="https://d3tdunqjn7n0wj.cloudfront.net/360x240/6432099557_bcb0630c3c_o-d762a9dae2918ed0c2a0462c788db0f6.jpg 360w, https://d3tdunqjn7n0wj.cloudfront.net/720x480/6432099557_bcb0630c3c_o-d762a9dae2918ed0c2a0462c788db0f6.jpg 720w, https://d3tdunqjn7n0wj.cloudfront.net/1440x960/6432099557_bcb0630c3c_o-d762a9dae2918ed0c2a0462c788db0f6.jpg 1440w" sizes="(min-width: 1390px) 310px, (min-width: 1000px) 25vw, (min-width: 600px) 50vw, 100vw" class=""/></a>
+    
+    
+  </div>
+  
+
+  
+
+      <div class="flag t-bkg--before flag--inset bg-operations--before">
+  
+            <a href="/topics/operations" >Operations</a>
+    
+    
+  
+</div>
+  
+
+  <div class="text-group">
+    
+
+        <h2 class="block-title">
+          <a href="/ideas/ghosts-in-the-machines">Ghosts in the machines</a>
+    
+    
+    </h2>
+    
+
+          <div class="byline">
+  By <span class="author" itemscope itemtype="http://schema.org/Person"><a href="/people/3f5d7-courtneyw-nash" itemprop="name">Courtney Nash</a></span>
+</div>
+    
+          <p class="dek">The secret to successful infrastructure automation is people.</p>
+
+    
+    
+  </div>
+</article>
+
+                <article class="block block-common with-img inset-flag">
+    <div class="thumb">
+    <div class="features">
+          <div class="feature">
+        <span class="name">Video</span>
+        <span class="icon icon-play t-fill">
+  <svg role="img">
+    <title>play</title>
+    <use xlink:href="/assets/icons-8812ab3f83.svg#play"></use>
+  </svg>
+</span>
+      </div>
+    
+    </div>
+        <a href="/ideas/engineering-practices-for-microservices"><img src="https://d3tdunqjn7n0wj.cloudfront.net/360x240/ng-mc-1371-d8b474271982ca21a9606cd1172903b4.jpg" alt="Model of a frigate with 38 pieces, Anonymous, c. 1780 - c. 1830" srcset="https://d3tdunqjn7n0wj.cloudfront.net/360x240/ng-mc-1371-d8b474271982ca21a9606cd1172903b4.jpg 360w, https://d3tdunqjn7n0wj.cloudfront.net/720x480/ng-mc-1371-d8b474271982ca21a9606cd1172903b4.jpg 720w, https://d3tdunqjn7n0wj.cloudfront.net/1440x960/ng-mc-1371-d8b474271982ca21a9606cd1172903b4.jpg 1440w" sizes="(min-width: 1390px) 310px, (min-width: 1000px) 25vw, (min-width: 600px) 50vw, 100vw" class=""/></a>
+    
+    
+  </div>
+  
+
+  
+
+      <div class="flag t-bkg--before flag--inset bg-operations--before">
+  
+            <a href="/topics/operations" >Operations</a>
+    
+    
+  
+</div>
+  
+
+  <div class="text-group">
+    
+
+        <h2 class="block-title">
+          <a href="/ideas/engineering-practices-for-microservices">Engineering practices for microservices</a>
+    
+    
+    </h2>
+    
+
+          <div class="byline">
+  By <span class="author" itemscope itemtype="http://schema.org/Person"><a href="/people/ffa30-neal-ford" itemprop="name">Neal Ford</a></span><span class="author" itemscope itemtype="http://schema.org/Person"><a href="/people/0086c-ryan-murray" itemprop="name">Ryan Murray</a></span>
+</div>
+    
+          <p class="dek">Learn about key microservices principles like Last Responsible Moment, risk sliders to assess benefit versus risk, heatlhchecks, and metrics.</p>
+
+    
+    
+  </div>
+</article>
+
+      
+  	</section>
+    
+
+</section>
+  
+</aside>
+
+      </div>
+    </div>
+  </article>
+</main>
+
+
+
+
+
+
+
+
+  <footer role="contentinfo">
+  <div class="footer-inner">
+
+    <div class="about-us">
+      <h3 class="title">About Us</h3>
+      <ul>
+        <li><a href="http://oreilly.com/about/">Our Company</a></li>
+        <li><a href="http://oreilly.com/work-with-us.html">Teach/Speak/Write</a></li>
+        <li><a href="http://oreilly.com/careers/">Careers</a></li>
+        <li><a href="http://shop.oreilly.com/category/customer-service.do">Customer Service</a></li>
+        <li><a href="http://shop.oreilly.com/category/customer-service.do">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="site-map">
+      <h3 class="title">Site Map</h3>
+      <ul>
+        <li><a href="/ideas">Ideas</a></li>
+        <li><a href="/learning">Learning</a></li>
+        <li><a href="/topics">Topics</a></li>
+        <li><a href="/all">All</a></li>
+      </ul>
+    </div>
+    <div class="social">
+      <ul>
+        <li><a   class="icon-link " href="http://fb.co/OReilly"><span class="icon icon-facebook t-fill icon--white icon--large">
+  <svg role="img">
+    <title>facebook</title>
+    <use xlink:href="/assets/icons-8812ab3f83.svg#facebook"></use>
+  </svg>
+</span></a>
+</li><li><a   class="icon-link " href="http://twitter.com/oreillymedia"><span class="icon icon-twitter t-fill icon--white icon--large">
+  <svg role="img">
+    <title>twitter</title>
+    <use xlink:href="/assets/icons-8812ab3f83.svg#twitter"></use>
+  </svg>
+</span></a>
+</li><li><a   class="icon-link " href="https://www.youtube.com/user/OreillyMedia"><span class="icon icon-youtube-large t-fill icon--white icon--large">
+  <svg role="img">
+    <title>youtube-large</title>
+    <use xlink:href="/assets/icons-8812ab3f83.svg#youtube-large"></use>
+  </svg>
+</span></a>
+</li><li><a   class="icon-link " href="https://plus.google.com/+oreillymedia"><span class="icon icon-google t-fill icon--white icon--large">
+  <svg role="img">
+    <title>google</title>
+    <use xlink:href="/assets/icons-8812ab3f83.svg#google"></use>
+  </svg>
+</span></a>
+</li><li><a   class="icon-link " href="https://www.linkedin.com/company/oreilly-media"><span class="icon icon-linkedin t-fill icon--white icon--large">
+  <svg role="img">
+    <title>linkedin</title>
+    <use xlink:href="/assets/icons-8812ab3f83.svg#linkedin"></use>
+  </svg>
+</span></a>
+</li>
+      </ul>
+    </div>
+  </div>
+  <div class="legal">
+	  <a href="/" class="logo logo-block t-bkg logo--medium">
+<svg>
+   <use xlink:href="/assets/icons-8812ab3f83.svg#oreilly-logo"></use>
+</svg>
+</a>
+  	<p class="copyright">&copy; 2017 O'Reilly Media, Inc. All trademarks and registered trademarks appearing on oreilly.com are the property of their respective owners.</p><br>
+  <a class="t-c" href="http://oreilly.com/terms/">Terms of Service</a>  <span class="bullet">&bull;</span>	<a class="t-c" href="http://oreilly.com/privacy.html">Privacy Policy</a> <span class="bullet">&bull;</span> <a class="t-c" href="http://www.oreilly.com/about/editorial_independence.html">Editorial Independence</a>
+	</div>
+	<figure class="animal"><img src="https://d3ebicv0uqgr7t.cloudfront.net/images/tarsier.png" class="animal-img" alt="Animal"></figure>
+</footer>
+
+
+
+  
+  
+    <!-- Start Adobe Digital Tag Manager -->
+  <script type="text/javascript">_satellite && _satellite.pageBottom();</script>
+  <!-- End Adobe Digital Tag Manager -->
+  
+</body>
+</html>
