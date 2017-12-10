@@ -14,7 +14,7 @@ setup(
         'docopt==0.6.2',
         'coverage==4.0.1',
         'ebooklib==0.15',
-        'lxml==3.4.0',
+        'lxml>=3.4.0',
         'pylint==1.4.4',
         'pytest==2.8.2',
         'requests==2.8.0',
