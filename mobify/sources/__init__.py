@@ -13,3 +13,4 @@ from .readthedocs import ReadTheDocsBookSource
 from .rust import RustBookSource
 from .tumblr import TumblrArchiveSource
 from .wikipedia import WikipediaSource
+from .wordpress import WordpressSource
