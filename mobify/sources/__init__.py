@@ -8,7 +8,8 @@ from .harp import HarpMainSource
 from .haskell import HaskellSource
 from .histmag import HistmagSource
 from .medium import MediumSource
-from. oreilly import OReillySource
+from .misc import MiscSource
+from .oreilly import OReillySource
 from .readthedocs import ReadTheDocsBookSource
 from .rust import RustBookSource
 from .tumblr import TumblrArchiveSource
