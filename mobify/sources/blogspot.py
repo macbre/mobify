@@ -12,53 +12,43 @@ class BlogSpotSource(MultiChapterSource):
 
     @see http://havnar.blogspot.com/
     """
+    SITEMAP = 'https://{blog}.blogspot.com/sitemap.xml?page={page}'
+
     @staticmethod
     def is_my_url(url):
         return 'blogspot.com/' in url
 
     def get_chapters(self):
-        links = self.tree.xpath('//ul[@class="hierarchy"]/li/a[@class="post-count-link" and contains(@href, "/search")]')
-        archive = [link.attrib.get('href') for link in links]
-
-        self._logger.info('Archive entries: {}'.format(archive))
+        # fetch sitemap
+        # https://havnar.blogspot.com/sitemap.xml?page=1
+        blog = re.search(r'://([^.]+).blogspot.com/', self._url).group(1)
+        page = 1
 
         posts = []
 
-        for entry in archive:
-            posts += BlogSpotPostsArchive(entry).get_chapters()
+        while True:
+            self._logger.info("Fetching %d sitemap page for '%s' blog", page, blog)
+            sitemap = self.http.get(self.SITEMAP.format(blog=blog, page=page)).text
 
-        posts.reverse()  # return from the oldest to the latest blog post
-        return posts
+            # <loc>https://havnar.blogspot.com/2015/08/wybory-do-parlamentu-wysp-owczych-2015.html</loc>
+            links = re.findall(r'<loc>([^<]+)</loc>', sitemap)
 
+            # no more links found
+            if not links:
+                break
 
-class BlogSpotPostsArchive(MultiChapterSource):
-    """
-    Parse per-year archive
+            for link in links:
+                posts.append(link)
 
-    @see http://havnar.blogspot.com/search?updated-min=2009-01-01T00:00:00%2B01:00&updated-max=2010-01-01T00:00:00%2B01:00&max-results=24
-    """
-    @staticmethod
-    def is_my_url(url):
-        """
-        This source cannot be created directly from Publisher
-        """
-        raise NotImplementedError
+            page += 1
 
-    def get_chapters(self):
-        posts = self.tree.xpath('//*[@itemprop="blogPost"]')
-        self._logger.info('Posts: {}'.format(len(posts)))
+        # process all the blog posts
+        self._logger.info("Found %d posts", len(posts))
 
-        chapters = []
-
-        for post in posts:
-            chapters.append(
-                BlogSpotPost(
-                    url='',
-                    content=self.get_node_html(post)
-                )
-            )
-
-        return chapters
+        return [
+            BlogSpotPost(post)
+            for post in reversed(posts)
+        ]
 
 
 class BlogSpotPost(MobifySource):
@@ -70,26 +60,41 @@ class BlogSpotPost(MobifySource):
         raise NotImplementedError
 
     def get_html(self):
-        content = self.xpath('*[contains(@itemprop, "articleBody")]')
+        # old and new skin
+        content = self.xpath('//*[contains(@itemprop, "articleBody")]') or \
+                  self.xpath('//div[@class="post" and script]')
+
+        # print(content)
 
         # HTML clenaup
         post = self.remove_nodes(content, [
             '*//a[img]',
-            '*//xml'
+            '*//xml',
+
+            # new blogpost skins
+            '*//meta',
+            '*//time',
+            'script',
+            # footer with tags
+            '*[@class="post-footer"]',
+            # title
+            'h3',
+            '*//h3',
         ])
 
         html = self.get_node_html(post)
-        html = re.sub(r'</?(span|a|img|em|div)[^>]*>', '', html)
+        html = re.sub(r'</?(span|a|img|em|div)[^>]*>', '', html).strip()
 
-        print(html)
+        # print(html); print(self.get_title()); raise Exception('foo')
 
         return u'<h1>{title}</h1>\n\n{content}'.format(
             title=self.get_title(),
-            content=html.strip()
+            content=html
         )
 
     def get_title(self):
-        return self.get_node('//*[@itemprop="name"]/a') or 'Post'
+        # <meta content='...' property='og:title'/>
+        return self.get_node('//meta[@property="og:title"]', attr='content') or 'Post'
 
     def get_author(self):
         return 'blogspot.com'
