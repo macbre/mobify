@@ -7,6 +7,7 @@ from .google_sre import GoogleSRESource
 from .harp import HarpMainSource
 from .haskell import HaskellSource
 from .histmag import HistmagSource
+from .martinfowler import MartinFowlerSource
 from .medium import MediumSource
 from .misc import MiscSource
 from .oreilly import OReillySource
