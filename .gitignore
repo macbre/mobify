@@ -64,3 +64,4 @@ target/
 *.mobi
 
 .mobify_history
+.pytest_cache/

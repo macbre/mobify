@@ -12,12 +12,12 @@ setup(
     packages=find_packages(),
     install_requires=[
         'docopt==0.6.2',
-        'coverage==4.0.1',
-        'ebooklib==0.15',
+        'coverage==4.5.1',
+        'ebooklib==0.17',
         'lxml>=3.4.0',
-        'pylint==1.4.4',
-        'pytest==2.8.2',
-        'requests==2.8.0',
+        'pylint==1.9.2',
+        'pytest==3.6.3',
+        'requests==2.19.1',
     ],
     include_package_data=True,
     entry_points={
