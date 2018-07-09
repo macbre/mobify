@@ -10,6 +10,7 @@ from .histmag import HistmagSource
 from .martinfowler import MartinFowlerSource
 from .medium import MediumSource
 from .misc import MiscSource
+from .local_fo import LocalFoSource
 from .oreilly import OReillySource
 from .readthedocs import ReadTheDocsBookSource
 from .rust import RustBookSource
