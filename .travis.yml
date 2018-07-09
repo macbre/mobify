@@ -1,9 +1,11 @@
 language: python
 python:
   - "2.7"
-  - "3.3"
   - "3.4"
   - "3.5"
   - "3.6"
+  - "3.7-dev"
 install: pip install six; make install
 script: make test
+# @see https://github.com/nickstenning/travis-pip-cache/issues/1
+cache: pip
