@@ -108,7 +108,7 @@ class MobifySource(object):
         """
         Get node's text content or attribute value using xpath
 
-        :rtype: str
+        :rtype: str|None
         """
         node = self.xpath(xpath)
 
