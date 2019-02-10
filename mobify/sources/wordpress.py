@@ -62,10 +62,19 @@ class WordpressSource(MultiChapterSource):
         return [
             WordpressPost(link)
             for link in links
-            # https://blogvigdis.wordpress.com/2017/12/10/jolasveinar-islandzkie-mikolaje/
-            # https://farerskiekadry.pl/2018/11/farerskie-okruszki.html
-            if re.search(r'/\d{4}/\d{2}/', link)
+            if self.is_post_url(link)
         ]
+
+    @staticmethod
+    def is_post_url(url):
+        """
+        :type url str
+        :rtype: bool
+        """
+        # https://blogvigdis.wordpress.com/2017/12/10/jolasveinar-islandzkie-mikolaje/
+        # https://farerskiekadry.pl/2018/11/farerskie-okruszki.html
+        # https://pofikasz.pl/post-sitemap.xml
+        return re.search(r'/\d{4}/\d{2}/', url)
 
 
 class WordpressPost(MobifySource):
