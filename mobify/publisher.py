@@ -114,10 +114,16 @@ class Publisher(object):
         for source in sources:
             self._logger.debug('Parsing chapter #{} using {} ...'.format(chapter_id, source))
 
+            html = source.get_html()
+
+            if html is None:
+                self._logger.info('This chapter is empty, skipping...')
+                continue
+
             chapter = epub.EpubHtml(
                 title=source.get_title(),
                 file_name='{}.xhtml'.format(chapter_id),
-                content=source.get_html()
+                content=html
             )
 
             chapters.append(chapter)
