@@ -17,7 +17,7 @@ setup(
         'lxml>=3.4.0',
         'pylint==1.9.2',
         'pytest==3.6.3',
-        'requests==2.19.1',
+        'requests==2.20.0',
     ],
     include_package_data=True,
     entry_points={
