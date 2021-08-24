@@ -16,7 +16,7 @@ setup(
         'ebooklib==0.17',
         'lxml>=3.4.0',
         'pylint==2.10.2',
-        'pytest==3.6.3',
+        'pytest==6.2.4',
         'requests==2.20.0',
     ],
     include_package_data=True,
