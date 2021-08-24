@@ -1,0 +1,45 @@
+name: Python
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # https://github.com/actions/python-versions/blob/main/versions-manifest.json
+        python-version:
+        - "3.6"
+        - "3.7"
+        - "3.8"
+        - "3.9"
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2.2.2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Load ~/.cache directory and Poetry .venv
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cache/pip
+        key: cache-${{ matrix.python-version }}-${{ hashFiles('setup.py') }}
+
+    - name: Install dependencies
+      run: |
+        pip install wheel
+        pip install .
+
+    - name: Test with pytest
+      run: pytest .
+
+    - name: Lint with pylint
+      run: pylint .
