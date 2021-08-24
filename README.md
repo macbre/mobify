@@ -1,4 +1,4 @@
-mobify [![Build Status](https://api.travis-ci.org/macbre/mobify.png?branch=master)](http://travis-ci.org/macbre/mobify)
+mobify
 ------
 
 Download a webpage as an e-book
