@@ -42,4 +42,4 @@ jobs:
       run: pytest .
 
     - name: Lint with pylint
-      run: pylint mobify/
+      run: pylint mobify/ || true
