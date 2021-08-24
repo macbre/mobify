@@ -15,7 +15,7 @@ setup(
         'coverage==4.5.1',
         'ebooklib==0.17',
         'lxml>=3.4.0',
-        'pylint==1.9.2',
+        'pylint==2.10.2',
         'pytest==3.6.3',
         'requests==2.19.1',
     ],
