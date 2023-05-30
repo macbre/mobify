@@ -12,16 +12,16 @@ setup(
     packages=find_packages(),
     install_requires=[
         'docopt==0.6.2',
-        'ebooklib==0.17.1',
-        'lxml==4.6.3',
-        'requests==2.20.0',
+        'ebooklib==0.18',
+        'lxml==4.9.2',
+        'requests==2.30.0',
     ],
     extras_require={
         'dev': [
-            'coverage==5.5',
-            'pylint==2.10.2',
-            'pytest==6.2.4',
-            'pytest-cov==2.12.1'
+            'coverage==7.2.7',
+            'pylint==2.17.4',
+            'pytest==7.3.1',
+            'pytest-cov==4.1.0'
         ]
     },
     include_package_data=True,
@@ -33,9 +33,9 @@ setup(
     classifiers=[
         "Environment :: Console",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
     ]
 )
