@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import re
 
 from mobify.source import MultiPageSource, MobifySource
@@ -17,7 +18,7 @@ class HistmagSource(MultiPageSource):
     def get_pages(self):
         url = self.extend_url(self._url)
 
-        # https://histmag.org/Maurycy-Beniowski-bunt-na-Kamczatce-13947/3
+        # https://histmag.org/Droga-Leopolda-II-do-wlasnej-kolonii.-Jak-krol-Belgii-stworzyl-w-Afryce-system-zaglady-21541
         try:
             last_page_link = self.tree.xpath('//div[@class="paginator"][1]//a')[-1].attrib.get('href')
             last_page_no = int(last_page_link.split('/')[-1])  # 3
@@ -62,18 +63,16 @@ odnośnika do materiału objętego licencją.</small></p>
         raise NotImplementedError
 
     def get_inner_html(self):
-        article = self.xpath('//*[@class="middle"]')
+        article = self.xpath('//div[@id="styledcontent"]')
 
         # clean up the HTML
         xpaths = [
-            'table',
-            'div[@class="paginator"]',
-            'h4',  # Zobacz także
-            '*//span/a[img]',  # big pictures
-            '*//span/img',  # inline pictures
-            'img',
-            'div[@class="snippet"]',  # reklamy
-            'h3[contains(text(), "Tekst jest fragmentem")]',  # fragmenty książek
+            '*//div[@class="py-0.5"]',  # zobacz też
+            '*//div[contains(@class,"flex")]',  # reklama
+            '*//div[contains(@style,"flex")]',  # reklama
+            '*//div[@class="py-8"]',  # polecajki
+            '*//*[@class="childrenblocks"]',  # ilustracje
+            '*//iframe',  # youtube
         ]
         article = self.remove_nodes(article, xpaths)
 
@@ -95,17 +94,28 @@ odnośnika do materiału objętego licencją.</small></p>
         ]).strip()
 
     def get_title(self):
-        # <h1 class="title"><p>Maurycy Beniowski - bunt na Kamczatce</p></h1>
-        return self.get_node('//div[contains(@class, "article_panel")]//p[1]').strip()
+        # <h1 style="...">Droga Leopolda II do własnej kolonii. Jak król Belgii stworzył w Afryce system zagłady?</h1>
+        return self.get_node('//h1').strip()
+
+    def _get_metadata(self) -> dict:
+        # <script id="__NEXT_DATA__" type="application/json">
+        meta = self.get_node('//script[@id="__NEXT_DATA__"]')
+        try:
+            # {"props":{"pageProps":{"post":{"id":21541,"title":"D", "excerpt":"W
+            data = json.loads(meta)
+
+            return data['props']['pageProps']['post']
+        except:
+            return {}
 
     def get_lead(self):
-        # <h3 class="lead"><p>Po upadku konfederacji ...</p></h3>
-        lead = self.get_node('//div[contains(@class, "article_panel")]//p[2]')
+        lead = self._get_metadata().get('excerpt', '')
 
         return lead.strip() if lead else ''
 
     def get_author(self):
-        return self.get_node('//*[contains(@class, "author_name")]//a/text()[2]').strip()
+        # <a style="text-decoration:none" href="#authors">Paweł Marcinkiewicz</a>
+        return self.get_node('//a[@href="#authors"]').strip()
 
     def get_language(self):
         return 'pl'

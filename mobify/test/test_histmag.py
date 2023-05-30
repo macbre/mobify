@@ -14,6 +14,8 @@ class Histmag(MobifyTestCase):
             'http://histmag.org/Niech-zyje-car-Wladyslaw-Zygmuntowicz-Cz.-3-Upadek-planow-hetmana-8449')
         assert HistmagSource.is_my_url(
             'https://histmag.org/czy-powstanie-listopadowe-bylo-skazane-na-porazke-13520')
+        assert HistmagSource.is_my_url(
+            'https://histmag.org/Droga-Leopolda-II-do-wlasnej-kolonii.-Jak-krol-Belgii-stworzyl-w-Afryce-system-zaglady-21541')
 
     @staticmethod
     def test_extend_url():
@@ -34,57 +36,28 @@ class Histmag(MobifyTestCase):
         ) == 'https://histmag.org/Prawdziwy-powod-wybuchu-I-wojny-swiatowej-9648'
 
 
-class HistmagBeniowski(MobifyTestCase):
+class HistmagKoloniaBelgijska(MobifyTestCase):
 
     _source = None
 
     def setUp(self):
-        # @see https://histmag.org/Maurycy-Beniowski-bunt-na-Kamczatce-13947
+        # https://histmag.org/Droga-Leopolda-II-do-wlasnej-kolonii.-Jak-krol-Belgii-stworzyl-w-Afryce-system-zaglady-21541
         self._source = HistmagPage(
             url='',
-            content=self.get_fixture('Maurycy-Beniowski-bunt-na-Kamczatce.html')
+            content=self.get_fixture('kolonia-belgijska.html')
         )
 
     def test_parsing(self):
-        assert self._source.get_title() == 'Maurycy Beniowski - bunt na Kamczatce'
-        assert self._source.get_lead() == u'Po upadku konfederacji barskiej został zesłany na Kamczatkę. Awanturnicza natura nie pozwoliła mu jednak długo zagrzać tam miejsca. Tak Maurycy Beniowski stanął na czele buntu. Czy wywalczył upragnioną wolność?'
-        assert self._source.get_author() == u'Mateusz Będkowski'
+        assert self._source.get_title() == 'Droga Leopolda II do własnej kolonii. Jak król Belgii stworzył w Afryce system zagłady?'
+        assert self._source.get_lead().startswith('W latach 1885-1908, w Wolnym Państwie Kongo, zamordowano i okaleczono ponad')
+        assert self._source.get_author() == 'Paweł Marcinkiewicz'
         assert self._source.get_language() == 'pl'
 
         html = self._source.get_html()
         print(html)  # failed assert will print the raw HTML
 
-        assert '<h1>Maurycy Beniowski - bunt na Kamczatce</h1>' in html
-        assert '<p><strong>Po upadku konfederacji barskiej' in html
-        assert u'<p>W październiku 1769 roku Beniowski i Wynbladth uczestniczyć mieli w spisku' in html
+        assert '<h1>Droga Leopolda II do własnej kolonii. Jak król Belgii stworzył w Afryce system zagłady?</h1>' in html
+        assert '<h2>Motywacje Leopolda</h2>' in html
+        assert '<p>Leopold II rządził swoją kolonią przez dwadzieścia trzy lata.' in html
 
-        assert 'Kamczatka, ilustracja' not in html
-        assert 'Maurycy Beniowski (1741-1786) (domena publiczna)' not in html
-        assert u'<h4>Zobacz także:</h4>' not in html
-
-
-class HistmagChurchill(MobifyTestCase):
-
-    _source = None
-
-    def setUp(self):
-        # @see https://histmag.org/Winston-Churchill-lew-Albionu-14521
-        self._source = HistmagPage(
-            url='',
-            content=self.get_fixture('Winston-Churchill-lew-Albionu-14521.html')
-        )
-
-    def test_parsing(self):
-        assert self._source.get_title() == u'Winston Churchill – lew Albionu'
-        assert self._source.get_lead() == ''
-        assert self._source.get_author() == u'Michał Gadziński'
-        assert self._source.get_language() == 'pl'
-
-        html = self._source.get_html()
-        print(html)  # failed assert will print the raw HTML
-
-        assert u'<h1>Winston Churchill – lew Albionu</h1>' in html
-        assert u'<h3>Potomek księcia Marlborough</h3>' in html
-        assert u'<p>Winston Leonard Spencer-Churchill przyszedł na świat 30 listopada 1874 roku. ' in html
-
-        assert u'<h3>Tekst jest fragmentem e-booka Michała Gadzińskiego „Perły imperium brytyjskiego”:</h3>' not in html
+        assert 'Reklama' not in html
