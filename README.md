@@ -22,11 +22,7 @@ pip install -U -e .
 
 ### For Kindle users
 
-You need to install `calibre` package to be able to convert epub to mobi (using `ebook-convert`)
-
-```
-apt-get install calibre
-```
+Your Kindle supports epub files.
 
 ## Usage
 
