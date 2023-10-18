@@ -2,7 +2,7 @@
 from __future__ import print_function
 
 from . import MobifyTestCase
-from mobify.sources.histmag import HistmagPage, HistmagSource
+from mobify.sources.histmag import HistmagSource
 
 
 class Histmag(MobifyTestCase):
@@ -42,7 +42,7 @@ class HistmagKoloniaBelgijska(MobifyTestCase):
 
     def setUp(self):
         # https://histmag.org/Droga-Leopolda-II-do-wlasnej-kolonii.-Jak-krol-Belgii-stworzyl-w-Afryce-system-zaglady-21541
-        self._source = HistmagPage(
+        self._source = HistmagSource(
             url='',
             content=self.get_fixture('kolonia-belgijska.html')
         )

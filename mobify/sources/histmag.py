@@ -2,43 +2,15 @@
 import json
 import re
 
-from mobify.source import MultiPageSource, MobifySource
+from mobify.source import MobifySource
 
 
-class HistmagSource(MultiPageSource):
-    @staticmethod
-    def is_my_url(url):
-        return '//histmag.org/' in url
-
-    @staticmethod
-    def extend_url(url):
-        url = url.split('?')[0]
-        return url
-
-    def get_pages(self):
-        url = self.extend_url(self._url)
-
-        # https://histmag.org/Droga-Leopolda-II-do-wlasnej-kolonii.-Jak-krol-Belgii-stworzyl-w-Afryce-system-zaglady-21541
-        try:
-            last_page_link = self.tree.xpath('//div[@class="paginator"][1]//a')[-1].attrib.get('href')
-            last_page_no = int(last_page_link.split('/')[-1])  # 3
-        except IndexError:
-            last_page_no = 1
-
-        pages = ['{}/{}'.format(url, page) for page in range(1, last_page_no+1)]
-
-        self._logger.info('Chapters: {}'.format(pages))
-
-        return [HistmagPage(url=page) for page in pages]
-
-
-class HistmagPage(MobifySource):
-
+class HistmagSource(MobifySource):
     HEADER = u"""
 <h1>{title}</h1>
 <p><strong>{lead}</strong></p>
 <p><small>{author}</small><br></p>
-"""
+    """
 
     FOOTER = u"""
 <br><br>
@@ -57,13 +29,16 @@ odnośnika do materiału objętego licencją.</small></p>
 
     @staticmethod
     def is_my_url(url):
-        """
-        This source cannot be created directly from Publisher
-        """
-        raise NotImplementedError
+        return '//histmag.org/' in url
+
+    @staticmethod
+    def extend_url(url):
+        url = url.split('?')[0]
+        return url
 
     def get_inner_html(self):
-        article = self.xpath('//div[@id="styledcontent"]')
+        # <div style="margin-top:-24px" id="article">
+        article = self.xpath('//div[@id="article"]')
 
         # clean up the HTML
         xpaths = [
@@ -79,9 +54,13 @@ odnośnika do materiału objętego licencją.</small></p>
         html = self.get_node_html(article)
 
         # tags cleanup
+        html = re.sub(r'<h1[^>]+>[^>]+</h1>', '', html)
         html = re.sub(r'<h2></h2>', '', html)
         html = re.sub(r'<p>\s*</p>', '', html)
         html = re.sub(r'</?(span|a|img|em|div)[^>]*>', '', html)
+
+        html = html.replace('zobacz też:', '')
+        html = html.replace(self.get_lead(), '')
 
         return html
 
@@ -98,24 +77,27 @@ odnośnika do materiału objętego licencją.</small></p>
         return self.get_node('//h1').strip()
 
     def _get_metadata(self) -> dict:
-        # <script id="__NEXT_DATA__" type="application/json">
-        meta = self.get_node('//script[@id="__NEXT_DATA__"]')
+        # <script type="application/ld+json">
+        meta = self.get_node('//script[@type="application/ld+json"]')
         try:
-            # {"props":{"pageProps":{"post":{"id":21541,"title":"D", "excerpt":"W
+            # "@type": "Article",
+            # "headline": "Droga Leopolda II do własnej kolonii. Jak król Belgii stworzył w Afryce system zagłady?",
+            # "image": "https://histmag.org/grafika/2020_articles/LeopoldII/6_leopold.jpg  ",
+            #  "author": "Paweł Marcinkiewicz",
+            #  "description": "W latach 1885-1908, w Wolnym Państwie Kongo, ..."
             data = json.loads(meta)
 
-            return data['props']['pageProps']['post']
+            return data
         except:
             return {}
 
     def get_lead(self):
-        lead = self._get_metadata().get('excerpt', '')
+        lead = self._get_metadata().get('description', '')
 
         return lead.strip() if lead else ''
 
     def get_author(self):
-        # <a style="text-decoration:none" href="#authors">Paweł Marcinkiewicz</a>
-        return self.get_node('//a[@href="#authors"]').strip()
+        return self._get_metadata().get('author', '')
 
     def get_language(self):
         return 'pl'
