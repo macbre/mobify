@@ -37,7 +37,8 @@ odnośnika do materiału objętego licencją.</small></p>
         return url
 
     def get_inner_html(self):
-        article = self.xpath('//div[@id="styledcontent"]')
+        # <div style="margin-top:-24px" id="article">
+        article = self.xpath('//div[@id="article"]')
 
         # clean up the HTML
         xpaths = [
@@ -53,9 +54,13 @@ odnośnika do materiału objętego licencją.</small></p>
         html = self.get_node_html(article)
 
         # tags cleanup
+        html = re.sub(r'<h1[^>]+>[^>]+</h1>', '', html)
         html = re.sub(r'<h2></h2>', '', html)
         html = re.sub(r'<p>\s*</p>', '', html)
         html = re.sub(r'</?(span|a|img|em|div)[^>]*>', '', html)
+
+        html = html.replace('zobacz też:', '')
+        html = html.replace(self.get_lead(), '')
 
         return html
 
