@@ -18,7 +18,7 @@ setup(
     ],
     extras_require={
         'dev': [
-            'coverage==7.4.3',
+            'coverage==7.4.4',
             'pylint==3.1.0',
             'pytest==7.4.4',
             'pytest-cov==4.1.0'
