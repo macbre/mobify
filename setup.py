@@ -13,7 +13,7 @@ setup(
     install_requires=[
         'docopt==0.6.2',
         'ebooklib==0.18',
-        'lxml==5.1.0',
+        'lxml==5.1.1',
         'requests==2.31.0',
     ],
     extras_require={
@@ -21,7 +21,7 @@ setup(
             'coverage==7.4.4',
             'pylint==3.1.0',
             'pytest==7.4.4',
-            'pytest-cov==4.1.0'
+            'pytest-cov==5.0.0'
         ]
     },
     include_package_data=True,
