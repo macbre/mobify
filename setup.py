@@ -21,7 +21,7 @@ setup(
             'coverage==7.4.4',
             'pylint==3.1.0',
             'pytest==7.4.4',
-            'pytest-cov==4.1.0'
+            'pytest-cov==5.0.0'
         ]
     },
     include_package_data=True,
