@@ -20,7 +20,7 @@ setup(
         'dev': [
             'coverage==7.4.4',
             'pylint==3.1.0',
-            'pytest==7.4.4',
+            'pytest==8.1.1',
             'pytest-cov==5.0.0'
         ]
     },
