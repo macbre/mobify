@@ -13,7 +13,7 @@ setup(
     install_requires=[
         'docopt==0.6.2',
         'ebooklib==0.18',
-        'lxml==5.2.0',
+        'lxml==5.2.1',
         'requests==2.31.0',
     ],
     extras_require={
