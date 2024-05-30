@@ -14,7 +14,7 @@ setup(
         'docopt==0.6.2',
         'ebooklib==0.18',
         'lxml==5.2.2',
-        'requests==2.32.2',
+        'requests==2.32.3',
     ],
     extras_require={
         'dev': [
