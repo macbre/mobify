@@ -5,17 +5,9 @@ from unittest import TestCase
 
 class MobifyTestCase(TestCase):
 
-    @property
-    def __dir__(self):
+    def get_dir(self) -> str:
         return os.path.dirname(os.path.abspath(__file__))
 
-    def get_fixture(self, name):
-        with open(self.__dir__ + '/fixtures/{}'.format(name), 'rt') as fixture:
-            res = fixture.read()
-
-            try:
-                res = res.decode('utf-8')  # Python 2.7
-            except AttributeError:
-                pass
-
-            return res
+    def get_fixture(self, name) -> str:
+        with open(f'{self.get_dir()}/fixtures/{name}', 'rt') as fixture:
+            return fixture.read()
