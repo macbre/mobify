@@ -5,7 +5,7 @@ install:
 	pip install -U -e .
 
 test:
-	py.test -x $(project_name)
+	pytest -x $(project_name)
 
 coverage:
 	rm -f .coverage*
