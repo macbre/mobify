@@ -27,3 +27,6 @@ class TrapFoSourceTest(MobifyTestCase):
 
         assert '>church</a>' not in html, "Internal links should be removed"
         assert 'church was built in 1879' in html, "Internal links should be removed, but their content kept"
+
+        assert '<h2 class="wp-block-heading">Further reading</h2>' not in html, 'Further reading sections are removed'
+        assert '<li>Tórshavn – Town</li>' not in html, 'Further reading sections are removed'

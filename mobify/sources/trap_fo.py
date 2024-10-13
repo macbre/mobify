@@ -55,6 +55,12 @@ class TrapFoSource(MobifySource):
         # id="ez-toc-container"
         content = self.remove_nodes(content, ['//*[@id="ez-toc-container"]'])
 
+        # <ul class="wp-block-list">
+        content = self.remove_nodes(content, ['//ul[@class="wp-block-list"]'])
+
+        # authors
+        content = self.remove_nodes(content, ['//div[contains(@class, "multiple-authors-wrapper")]'])
+
         # cleanup
         html = self.get_node_html(content)
 
@@ -65,6 +71,9 @@ class TrapFoSource(MobifySource):
         # remove links
         # <a href="https://trap.fo/en/the-islands-towns-and-settlements/vagar/" data-type="page" data-id="1691">Vágar</a>
         html = re.sub(r'<a[^>]+>([^<]+)</a>', '\\1', html)
+
+        # <h2 class="wp-block-heading">Further reading</h2>
+        html = html.replace('<h2 class="wp-block-heading">Further reading</h2>', '')
 
         return '<h1>{title}</h1>\n\n<p><small>{author}</small><br></p>\n\n{content}'.format(
             title=self.get_title(),
