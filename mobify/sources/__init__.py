@@ -14,6 +14,7 @@ from .local_fo import LocalFoSource
 from .oreilly import OReillySource
 from .readthedocs import ReadTheDocsBookSource
 from .rust import RustBookSource
+from .trap_fo import TrapFoMainSource
 from .tumblr import TumblrArchiveSource
 from .wikipedia import WikipediaSource
 from .wordpress import WordpressSource
