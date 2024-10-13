@@ -4,6 +4,7 @@ Trap.fo - English version
 
 @see https://github.com/macbre/mobify/issues/233
 @see https://trap.fo/wp-sitemap.xml
+@see https://trap.fo/en/the-islands-towns-and-settlements/mykines/
 """
 import re
 
@@ -60,6 +61,10 @@ class TrapFoSource(MobifySource):
         html = re.sub(r'\s?<br><br>', '</p>\n\n<p>', html)
         html = re.sub(r'<img [^>]+>', '', html)
         html = re.sub(r'<p [^>]+></p>', '', html)
+
+        # remove links
+        # <a href="https://trap.fo/en/the-islands-towns-and-settlements/vagar/" data-type="page" data-id="1691">Vágar</a>
+        html = re.sub(r'<a[^>]+>([^<]+)</a>', '\\1', html)
 
         return '<h1>{title}</h1>\n\n<p><small>{author}</small><br></p>\n\n{content}'.format(
             title=self.get_title(),
