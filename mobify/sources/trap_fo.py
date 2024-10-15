@@ -37,6 +37,14 @@ class TrapFoMainSource(MultiChapterSource):
 
             yield TrapFoSource(url)
 
+    def get_title(self):
+        return 'Trap The Faroe Islands'
+
+    def get_author(self):
+        raise 'Uttanríkis- og mentamálaráðið (Ministry of Foreign Affairs and Culture), BankNordik, Klaksvíkar Municipality, Articon, Fólkakirkjan í Føroyum (the Church of the Faroe Islands), Posta, Skansi Offshore, Danish-Faroese Culture Fund, the Nordic Forest Research Co-operation Committee and the Royal Danish Geographical Society'
+
+    def get_language(self):
+        raise 'en'
 
 class TrapFoSource(MobifySource):
 
