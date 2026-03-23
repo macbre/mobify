@@ -18,10 +18,10 @@ setup(
     ],
     extras_require={
         'dev': [
-            'coverage==7.13.1',
-            'pylint==4.0.4',
+            'coverage==7.13.5',
+            'pylint==4.0.5',
             'pytest==9.0.2',
-            'pytest-cov==7.0.0'
+            'pytest-cov==7.1.0'
         ]
     },
     include_package_data=True,
