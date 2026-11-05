@@ -12,7 +12,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'docopt==0.6.2',
-        'ebooklib==0.20',
+        'ebooklib==0.21',
         'lxml==6.1.3',
         'requests==2.34.2',
     ],
